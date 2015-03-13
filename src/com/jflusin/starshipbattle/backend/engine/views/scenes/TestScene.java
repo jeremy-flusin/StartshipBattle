@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.jflusin.starshipbattle.backend.engine.utils.SceneManager;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
-import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
+import com.jflusin.starshipbattle.backend.game.entities.AmmoEntity;
 import com.jflusin.starshipbattle.backend.game.entities.FixedEntity;
 import com.jflusin.starshipbattle.backend.game.entities.ShipEntity;
 
@@ -16,8 +16,6 @@ public class TestScene extends AbstractScene {
 	public TestScene(SceneManager sm) {
 		super(sm);
 	}
-
-	
 	
 	@Override
 	public void loadContent() {
@@ -32,7 +30,8 @@ public class TestScene extends AbstractScene {
 
 	@Override
 	public void update(float dt) {
-		handleInput();
+		super.update(dt);
+		ship.update();
 	}
 
 	@Override
@@ -42,6 +41,11 @@ public class TestScene extends AbstractScene {
 		sb.begin();
 		background.getSprite().draw(sb);
 		ship.getSprite().draw(sb);
+
+		for(AmmoEntity ammo: ship.getAmmos()){
+			ammo.getSprite().draw(sb);
+		}
+		
 		sb.end();
 		sb.setProjectionMatrix(cam.combined);
 		b2dr.render(world, b2dcam.combined);

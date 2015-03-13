@@ -1,5 +1,6 @@
 package com.jflusin.starshipbattle.backend.game.entities;
 
+
 public class FixedEntity extends AbstractEntity {
 
 	public FixedEntity(String texturePath) {
@@ -9,6 +10,11 @@ public class FixedEntity extends AbstractEntity {
 	@Override
 	public void handleInput() {
 		
+	}
+
+	@Override
+	public void update() {
+		super.update();
 	}
 
 }

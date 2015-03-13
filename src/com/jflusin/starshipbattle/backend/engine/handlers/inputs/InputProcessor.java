@@ -1,6 +1,5 @@
 package com.jflusin.starshipbattle.backend.engine.handlers.inputs;
 
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 
 public class InputProcessor extends InputAdapter {
@@ -29,35 +28,20 @@ public class InputProcessor extends InputAdapter {
 	
 	@Override
 	public boolean keyDown(int k){
-		if(k == Keys.UP){
-			InputHandler.setKey(InputHandler.UP, true);
-		}
-		if(k == Keys.DOWN){
-			InputHandler.setKey(InputHandler.DOWN, true);
-		}
-		if(k == Keys.LEFT){
-			InputHandler.setKey(InputHandler.LEFT, true);
-		}
-		if(k == Keys.RIGHT){
-			InputHandler.setKey(InputHandler.RIGHT, true);
-		}
+		InputHandler.setKey(k, true);
 		return true;
 	}
 
 	@Override
 	public boolean keyUp(int k){
-		if(k == Keys.UP){
-			InputHandler.setKey(InputHandler.UP, false);
-		}
-		if(k == Keys.DOWN){
-			InputHandler.setKey(InputHandler.DOWN, false);
-		}
-		if(k == Keys.LEFT){
-			InputHandler.setKey(InputHandler.LEFT, false);
-		}
-		if(k == Keys.RIGHT){
-			InputHandler.setKey(InputHandler.RIGHT, false);
-		}
+		InputHandler.setKey(k, false);
+		return true;
+	}
+	
+	@Override
+	public boolean mouseMoved(int screenX, int screenY) {
+		InputHandler.mouseX = screenX;
+		InputHandler.mouseY = screenY;
 		return true;
 	}
 }

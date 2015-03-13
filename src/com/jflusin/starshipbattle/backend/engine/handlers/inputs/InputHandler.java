@@ -14,10 +14,6 @@ public class InputHandler {
 	public static boolean[] prevkeys;
 	
 	public static final int NUM_KEYS = 100;
-	public static final int UP = 1;
-	public static final int DOWN = 2;
-	public static final int LEFT = 3;
-	public static final int RIGHT = 4;
 
 	static {
 		clicks = new boolean[2];
