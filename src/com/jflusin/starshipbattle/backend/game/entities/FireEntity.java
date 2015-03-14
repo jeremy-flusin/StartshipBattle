@@ -1,12 +1,12 @@
 package com.jflusin.starshipbattle.backend.game.entities;
 
-public class AmmoEntity extends AbstractEntity {
+public class FireEntity extends AbstractEntity {
 
 	private float angle = 0;
-	private float velocity = 40f;
+	private float velocity = 70f;
 	
-	public AmmoEntity(float x, float y, float radAngle) {
-		super("res/ammo.png");
+	public FireEntity(float x, float y, float radAngle) {
+		super("res/fire.png");
 		this.angle = radAngle;
 		setX(x);
 		setY(y);
@@ -20,6 +20,7 @@ public class AmmoEntity extends AbstractEntity {
 	@Override
 	public void update() {
 		super.update();
+		getSprite().setRotation((float)Math.toDegrees(angle));
 		float scaleX = (float)Math.cos(angle);
 		float scaleY = (float)Math.sin(angle);
 		float velX = scaleX * velocity;

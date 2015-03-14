@@ -3,17 +3,19 @@ package com.jflusin.starshipbattle.backend.game.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.jflusin.starshipbattle.backend.engine.handlers.inputs.InputHandler;
+import com.badlogic.gdx.math.Vector2;
 
 public abstract class AbstractEntity {
 
-	private float x;
-	private float y;
+	private Vector2 position;
+	private Vector2 acceleration;
 	
 	private Texture texture;
 	private Sprite sprite;
 	
 	public AbstractEntity(String texturePath) {
+		position = new Vector2();
+		acceleration = new Vector2();
 		texture = new Texture(Gdx.files.internal(texturePath));
 		sprite = new Sprite(texture);
 	}
@@ -22,33 +24,49 @@ public abstract class AbstractEntity {
 		return sprite;
 	}
 
-	public void setPosition(float x, float y){
-		this.x = x;
-		this.y = y;
+	public void setPosition(Vector2 position){
+		this.position = position;
 	}
 	
 	public void setX(float x){
-		this.x = x;
+		position.x = x;
 	}
 	
 	public void setY(float y){
-		this.y = y;
+		position.y = y;
 	}
 	
 	public float getX(){
-		return x;
+		return position.x;
 	}
 	
 	public float getY(){
-		return y;
+		return position.y;
 	}
 
+	public void setAcceleration(Vector2 acceleration){
+		this.acceleration = acceleration;
+	}
+	
+	public void setAccelerationX(float x){
+		this.acceleration.x = x;
+	}
+	
+	public void setAccelerationY(float y){
+		this.acceleration.y = y;
+	}
+
+	public float getAccelerationX(){
+		return acceleration.x;
+	}
+	
+	public float getAccelerationY(){
+		return acceleration.y;
+	}
+	
 	public abstract void handleInput();
 	
 	public void update(){
-		sprite.setPosition(x, y);
-		double angleRad = Math.atan(InputHandler.mouseY / InputHandler.mouseX);
-		double angleDeg = Math.toDegrees(angleRad);
-		sprite.setRotation((float) angleDeg);
+		sprite.setPosition(position.x, position.y);
 	};
 }

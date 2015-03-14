@@ -2,9 +2,11 @@ package com.jflusin.starshipbattle.backend.engine.views.scenes;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.jflusin.starshipbattle.backend.engine.main.Game;
 import com.jflusin.starshipbattle.backend.engine.utils.SceneManager;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
 import com.jflusin.starshipbattle.backend.game.entities.AmmoEntity;
+import com.jflusin.starshipbattle.backend.game.entities.FireEntity;
 import com.jflusin.starshipbattle.backend.game.entities.FixedEntity;
 import com.jflusin.starshipbattle.backend.game.entities.ShipEntity;
 
@@ -19,7 +21,7 @@ public class TestScene extends AbstractScene {
 	
 	@Override
 	public void loadContent() {
-		background = new FixedEntity("res/background.png");
+		background = new FixedEntity("res/background.jpg");
 		ship = new ShipEntity("res/starship_right.png");
 	}
 
@@ -39,11 +41,15 @@ public class TestScene extends AbstractScene {
 		Gdx.gl20.glClearColor(0, 0, 0, 0);
 		Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		sb.begin();
-		background.getSprite().draw(sb);
+		sb.draw(background.getSprite().getTexture(), 0, 0, Game.V_WIDTH, Game.V_HEIGHT);
 		ship.getSprite().draw(sb);
 
 		for(AmmoEntity ammo: ship.getAmmos()){
 			ammo.getSprite().draw(sb);
+		}
+		
+		for(FireEntity fire: ship.getFires()){
+			fire.getSprite().draw(sb);
 		}
 		
 		sb.end();

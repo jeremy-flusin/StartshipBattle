@@ -13,8 +13,8 @@ public class Game implements ApplicationListener{
 	public static final boolean IS_DEBUG = true;
 	public static final String TITLE = "StarshipBattle";
 	public static final String VERSION = "p-o-c";
-	public static final int V_WIDTH = 800;
-	public static final int V_HEIGHT = 600;
+	public static final int V_WIDTH = 1920;
+	public static final int V_HEIGHT = 1080;
 	public static final int SCALE = 1;
 	public static final float STEP = 1/60f;
 	

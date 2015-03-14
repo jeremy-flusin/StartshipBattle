@@ -1,28 +1,19 @@
 package com.jflusin.starshipbattle.backend.engine.handlers.inputs;
 
 import com.badlogic.gdx.InputAdapter;
+import com.jflusin.starshipbattle.backend.engine.main.Game;
 
 public class InputProcessor extends InputAdapter {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		if(button == 0){
-			InputHandler.setClick(0, screenX, screenY, true);
-		}
-		if(button == 1){
-			InputHandler.setClick(1, screenX, screenY, true);
-		}
+		InputHandler.setClick(button, screenX, screenY, true);
 		return true;
 	}
 	
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		if(button == 0){
-			InputHandler.setClick(0, screenX, screenY, false);
-		}
-		if(button == 1){
-			InputHandler.setClick(1, screenX, screenY, false);
-		}
+		InputHandler.setClick(button, screenX, screenY, false);
 		return true;
 	}
 	
@@ -41,7 +32,7 @@ public class InputProcessor extends InputAdapter {
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
 		InputHandler.mouseX = screenX;
-		InputHandler.mouseY = screenY;
+		InputHandler.mouseY = Game.V_HEIGHT - screenY;
 		return true;
 	}
 }

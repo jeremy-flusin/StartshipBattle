@@ -1,7 +1,6 @@
 package com.jflusin.starshipbattle.backend.engine.handlers.inputs;
 
 import com.jflusin.starshipbattle.backend.engine.main.Game;
-import com.jflusin.starshipbattle.backend.engine.utils.B2DVars;
 
 public class InputHandler {
 
@@ -14,10 +13,11 @@ public class InputHandler {
 	public static boolean[] prevkeys;
 	
 	public static final int NUM_KEYS = 100;
+	public static final int NUM_CLICKS = 10;
 
 	static {
-		clicks = new boolean[2];
-		prevClicks = new boolean[2];
+		clicks = new boolean[NUM_CLICKS];
+		prevClicks = new boolean[NUM_CLICKS];
 		keys = new boolean[NUM_KEYS];
 		prevkeys = new boolean[NUM_KEYS];
 	}
@@ -35,11 +35,15 @@ public class InputHandler {
 		return clicks[i] && !prevClicks[i];
 	}
 	
+	public static boolean isClickedAndPressed(int i){
+		return clicks[i];
+	}
+	
 	public static void setClick(int button, int x, int y, boolean value){
 		clicks[button] = value;
 		if(value){
-			mouseX = x / B2DVars.PPM;
-			mouseY = ( Game.V_HEIGHT - y ) / B2DVars.PPM;
+			mouseX = x;
+			mouseY = Game.V_HEIGHT - y;
 		}
 	}
 	
