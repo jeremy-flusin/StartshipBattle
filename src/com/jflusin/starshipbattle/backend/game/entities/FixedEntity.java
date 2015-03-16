@@ -26,5 +26,10 @@ public class FixedEntity extends AbstractEntity {
 	public Body createBody() {
 		return null;
 	}
+
+	@Override
+	public void onContact(AbstractEntity other) {
+		
+	}
 	
 }

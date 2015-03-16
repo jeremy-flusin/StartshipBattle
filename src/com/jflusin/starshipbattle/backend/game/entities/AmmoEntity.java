@@ -56,4 +56,9 @@ public class AmmoEntity extends AbstractEntity {
 		return body;
 	}
 
+	@Override
+	public void onContact(AbstractEntity other) {
+		
+	}
+
 }

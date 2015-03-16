@@ -3,7 +3,6 @@ package com.jflusin.starshipbattle.backend.engine.views.scenes;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Vector2;
-import com.jflusin.starshipbattle.backend.engine.handlers.contact.EntityCollider;
 import com.jflusin.starshipbattle.backend.engine.main.Game;
 import com.jflusin.starshipbattle.backend.engine.utils.SceneManager;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
@@ -70,17 +69,7 @@ public class TestScene extends AbstractScene {
 
 	@Override
 	public void manageColliders() {
-		contactHandler.addCollider(ShipEntity.class, ShipEntity.class, new EntityCollider() {
-			
-			@Override
-			public void endCollision() {
-				System.out.println("Collision Ended !");
-			}
-			
-			@Override
-			public void beginCollision() {
-				System.out.println("Collision began !");
-			}
-		});
+		contactHandler.registerEntity(ship);
+		contactHandler.registerEntity(enemy);
 	}
 }

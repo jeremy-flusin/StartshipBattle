@@ -46,6 +46,7 @@ public abstract class AbstractScene {
 		world = new World(new Vector2(0f, 0f), true);
 		world.setContactListener(contactHandler);
 		loadContent();
+		manageColliders();
 	}
 
 	public abstract void loadContent();

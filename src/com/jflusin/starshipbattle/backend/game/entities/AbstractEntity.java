@@ -101,5 +101,5 @@ public abstract class AbstractEntity {
 
 	public abstract void handleInput();
 	public abstract Body createBody();
-	
+	public abstract void onContact(AbstractEntity other);
 }

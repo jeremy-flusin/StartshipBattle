@@ -56,5 +56,10 @@ public class FireEntity extends AbstractEntity {
 		circle.dispose();
 		return body;
 	}
+
+	@Override
+	public void onContact(AbstractEntity other) {
+		
+	}
 	
 }

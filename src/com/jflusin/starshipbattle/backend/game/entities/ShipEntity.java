@@ -143,4 +143,12 @@ public class ShipEntity extends AbstractEntity {
 		circle.dispose();
 		return body;
 	}
+
+	@Override
+	public void onContact(AbstractEntity other) {
+		if(other instanceof ShipEntity){
+			this.acceleration.x = - this.acceleration.x;
+			this.acceleration.y = - this.acceleration.y;
+		}
+	}
 }
