@@ -2,6 +2,8 @@ package com.jflusin.starshipbattle.backend.engine.views.scenes;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.math.Vector2;
+import com.jflusin.starshipbattle.backend.engine.handlers.contact.EntityCollider;
 import com.jflusin.starshipbattle.backend.engine.main.Game;
 import com.jflusin.starshipbattle.backend.engine.utils.SceneManager;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
@@ -14,6 +16,7 @@ public class TestScene extends AbstractScene {
 	
 	private FixedEntity background;
 	private ShipEntity ship;
+	private ShipEntity enemy;
 	
 	public TestScene(SceneManager sm) {
 		super(sm);
@@ -21,8 +24,10 @@ public class TestScene extends AbstractScene {
 	
 	@Override
 	public void loadContent() {
-		background = new FixedEntity("res/background.jpg");
-		ship = new ShipEntity("res/starship_right.png");
+		background = new FixedEntity(world, "res/background.jpg", new Vector2(0,0), 1920, 1080);
+		ship = new ShipEntity(world, "res/starship_right.png", new Vector2(0, 100));
+		enemy = new ShipEntity(world, "res/enemy.png", 
+				new Vector2((float)Math.random() * 1000, ((float)Math.random() * 1000)));
 	}
 
 	@Override
@@ -34,6 +39,7 @@ public class TestScene extends AbstractScene {
 	public void update(float dt) {
 		super.update(dt);
 		ship.update();
+		enemy.update();
 	}
 
 	@Override
@@ -43,7 +49,7 @@ public class TestScene extends AbstractScene {
 		sb.begin();
 		sb.draw(background.getSprite().getTexture(), 0, 0, Game.V_WIDTH, Game.V_HEIGHT);
 		ship.getSprite().draw(sb);
-
+		enemy.getSprite().draw(sb);
 		for(AmmoEntity ammo: ship.getAmmos()){
 			ammo.getSprite().draw(sb);
 		}
@@ -61,5 +67,20 @@ public class TestScene extends AbstractScene {
 	public void dispose() {
 		
 	}
-	
+
+	@Override
+	public void manageColliders() {
+		contactHandler.addCollider(ShipEntity.class, ShipEntity.class, new EntityCollider() {
+			
+			@Override
+			public void endCollision() {
+				System.out.println("Collision Ended !");
+			}
+			
+			@Override
+			public void beginCollision() {
+				System.out.println("Collision began !");
+			}
+		});
+	}
 }

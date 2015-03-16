@@ -3,23 +3,33 @@ package com.jflusin.starshipbattle.backend.game.entities;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.World;
 import com.jflusin.starshipbattle.backend.engine.handlers.inputs.InputHandler;
-import com.jflusin.starshipbattle.backend.engine.main.Game;
 
 public class ShipEntity extends AbstractEntity {
 
 	public static float MAX_VELOCITY = 10f;
 	public static float ACCELERATION = 0.8f;
 	public static float DECELERATION = 0.5f;
+	public static float WIDTH = 32;
+	public static float HEIGHT = 32;
+
 	ArrayList<AmmoEntity> ammos;
 	ArrayList<FireEntity> fires;
 	
-	public ShipEntity(String texturePath) {
-		super(texturePath);
+	public ShipEntity(World world, String texturePath, 
+			Vector2 initPosition){
+		super(world, texturePath, initPosition, WIDTH, HEIGHT);
 		ammos = new ArrayList<AmmoEntity>();
 		fires = new ArrayList<FireEntity>();
 	}
-
+	
 	@Override
 	public void handleInput() {
 		
@@ -29,7 +39,7 @@ public class ShipEntity extends AbstractEntity {
 		if(InputHandler.isDown(Input.Keys.UP)){
 			accelerationY += ACCELERATION;
 			if(accelerationY >= MAX_VELOCITY){
-				accelerationY = MAX_VELOCITY;
+				accelerationY =  MAX_VELOCITY;
 			}
 		}else if(InputHandler.isDown(Input.Keys.DOWN)){
 			accelerationY -= ACCELERATION;
@@ -82,10 +92,14 @@ public class ShipEntity extends AbstractEntity {
 		setX(getX() + accelerationX); 
 		
 		if(InputHandler.isClicked(Input.Buttons.LEFT)){
-			ammos.add(new AmmoEntity(getX(), getY(), getMouseEntityRadAngle()));
+			ammos.add(new AmmoEntity(world, 
+					new Vector2(this.position.x, this.position.y), 
+					getMouseEntityRadAngle()));
 		};
 		if(InputHandler.isClicked(Input.Buttons.RIGHT)){
-			fires.add(new FireEntity(getX(), getY(), getMouseEntityRadAngle()));
+			fires.add(new FireEntity(world, 
+					new Vector2(this.position.x, this.position.y), 
+					getMouseEntityRadAngle()));
 		};
 	}
 	
@@ -98,16 +112,12 @@ public class ShipEntity extends AbstractEntity {
 		for (FireEntity fireEntity : fires) {
 			fireEntity.update();
 		}
-		getSprite().setRotation(getMouseEntityDegAngle());
+		setAngle(getMouseEntityRadAngle());
 	}
 
 	private float getMouseEntityRadAngle() {
 		double angleRad = Math.atan2(InputHandler.mouseY - getY() , InputHandler.mouseX - getX());
 		return (float)angleRad;
-	}
-	
-	private float getMouseEntityDegAngle() {
-		return (float) Math.toDegrees(getMouseEntityRadAngle());
 	}
 	
 	public ArrayList<AmmoEntity> getAmmos() {
@@ -117,30 +127,20 @@ public class ShipEntity extends AbstractEntity {
 	public ArrayList<FireEntity> getFires() {
 		return fires;
 	}
-
-	@Override
-	public void setX(float x) {
-		if(x < 0){
-			x = 0;
-			setAccelerationX(0);
-		}
-		if(x > Game.V_WIDTH - 64){
-			x = Game.V_WIDTH - 64;
-			setAccelerationX(0);
-		}
-		super.setX(x);
-	}
 	
 	@Override
-	public void setY(float y) {
-		if(y < 0){
-			y = 0;
-			setAccelerationY(0);
-		}
-		if(y > Game.V_HEIGHT - 64){
-			y = Game.V_HEIGHT - 64;
-			setAccelerationY(0);
-		}
-		super.setY(y);
+	public Body createBody() {
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyType.DynamicBody;
+		bodyDef.position.x = this.position.x;
+		bodyDef.position.y = this.position.y;
+		Body body = world.createBody(bodyDef);
+		CircleShape circle = new CircleShape();
+		circle.setRadius(0.5f);
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = circle;
+		body.createFixture(fixtureDef);
+		circle.dispose();
+		return body;
 	}
 }

@@ -43,7 +43,7 @@ public abstract class AbstractScene {
 
 		// Initializations
 		contactHandler = new ContactHandler();
-		world = new World(new Vector2(0, 0f), true);
+		world = new World(new Vector2(0f, 0f), true);
 		world.setContactListener(contactHandler);
 		loadContent();
 	}
@@ -52,6 +52,7 @@ public abstract class AbstractScene {
 	public abstract void handleInput();
 	public abstract void render();
 	public abstract void dispose();
+	public abstract void manageColliders();
 	
 	public void update(float dt){
 		world.step(dt, 6, 2);
