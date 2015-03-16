@@ -2,14 +2,14 @@ package com.jflusin.starshipbattle.backend.game.entities;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.World;
+import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
 
 
 public class FixedEntity extends AbstractEntity {
 
-	public FixedEntity(World world, String texturePath, 
+	public FixedEntity(AbstractScene scene, String texturePath, 
 			Vector2 initPosition, float width, float height) {
-		super(world, texturePath, initPosition, width, height);
+		super(scene, texturePath, initPosition, width, height, true);
 	}
 
 	@Override
@@ -18,8 +18,8 @@ public class FixedEntity extends AbstractEntity {
 	}
 
 	@Override
-	public void update() {
-		super.update();
+	public void update(float dt) {
+
 	}
 
 	@Override

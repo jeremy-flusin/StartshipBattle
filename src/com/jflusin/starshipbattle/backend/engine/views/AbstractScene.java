@@ -2,15 +2,21 @@ package com.jflusin.starshipbattle.backend.engine.views;
 
 import static com.jflusin.starshipbattle.backend.engine.utils.B2DVars.PPM;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 import com.jflusin.starshipbattle.backend.engine.handlers.contact.ContactHandler;
 import com.jflusin.starshipbattle.backend.engine.main.Game;
 import com.jflusin.starshipbattle.backend.engine.utils.ContentManager;
 import com.jflusin.starshipbattle.backend.engine.utils.SceneManager;
+import com.jflusin.starshipbattle.backend.engine.utils.UserData;
+import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
 
 public abstract class AbstractScene {
 	
@@ -29,6 +35,9 @@ public abstract class AbstractScene {
 	
 	protected World world;
 
+	protected ArrayList<AbstractEntity> entities;
+	protected AbstractEntity player;
+	
 	public AbstractScene(SceneManager sm) {
 		this.sm = sm;
 		game = sm.getGame();
@@ -36,8 +45,10 @@ public abstract class AbstractScene {
 		cam = game.getCamera();
 		cm = new ContentManager();
 		
-		// Debug initializations
-		b2dr = new Box2DDebugRenderer();
+		if(Game.IS_DEBUG){
+			b2dr = new Box2DDebugRenderer();
+		}
+		
 		b2dcam = new OrthographicCamera();
 		b2dcam.setToOrtho(false, Game.V_WIDTH / PPM, Game.V_HEIGHT / PPM);
 
@@ -45,22 +56,64 @@ public abstract class AbstractScene {
 		contactHandler = new ContactHandler();
 		world = new World(new Vector2(0f, 0f), true);
 		world.setContactListener(contactHandler);
+		entities = new ArrayList<AbstractEntity>();
 		loadContent();
-		manageColliders();
 	}
 
 	public abstract void loadContent();
 	public abstract void handleInput();
 	public abstract void render();
 	public abstract void dispose();
-	public abstract void manageColliders();
 	
 	public void update(float dt){
+		clearWorld();
+		clearScene();
 		world.step(dt, 6, 2);
 		handleInput();
+		for (AbstractEntity entity : entities) {
+			entity.update(dt);
+		}
 	}
 	
+	private void clearWorld() {
+		Array<Body> bodies = new Array<Body>();
+		world.getBodies(bodies);
+		for (Body body : bodies) {
+			if(UserData.TO_DESTROY.equals(body.getUserData())){
+				body.getFixtureList().clear();
+				world.destroyBody(body);
+			}
+		}
+	}	
+	
+	private void clearScene() {
+		ArrayList<AbstractEntity> toDestroy = new ArrayList<AbstractEntity>();
+		for (AbstractEntity entity : entities) {
+			if(UserData.TO_DESTROY.equals(entity.getUserData())){
+				toDestroy.add(entity);
+			}
+		}
+		for (AbstractEntity entity : toDestroy) {
+			entities.remove(entity);
+		}
+	}
+
 	public ContentManager getContent(){
 		return cm;
+	}
+	
+	public World getWorld() {
+		return world;
+	}
+	
+	public void addEntity(AbstractEntity entity) {
+		this.entities.add(entity);
+		if(entity.isCollidable()){
+			contactHandler.registerEntity(entity);
+		}
+	}
+	
+	public void removeEntity(AbstractEntity entity){
+		this.entities.remove(entity);
 	}
 }

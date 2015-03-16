@@ -56,4 +56,8 @@ public class ContactHandler implements ContactListener {
 	public void registerEntity(AbstractEntity entity){
 		registeredEntities.add(entity);
 	}
+	
+	public void unregisterEntity(AbstractEntity entity){
+		registeredEntities.remove(entity);
+	}
 }

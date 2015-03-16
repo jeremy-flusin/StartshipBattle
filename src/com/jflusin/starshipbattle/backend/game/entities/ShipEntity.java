@@ -1,7 +1,5 @@
 package com.jflusin.starshipbattle.backend.game.entities;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -9,25 +7,23 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.World;
 import com.jflusin.starshipbattle.backend.engine.handlers.inputs.InputHandler;
+import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
 
 public class ShipEntity extends AbstractEntity {
 
+	public static int MAX_LIFE = 50;
+	public int currentLife = MAX_LIFE;
+	
 	public static float MAX_VELOCITY = 10f;
 	public static float ACCELERATION = 0.8f;
 	public static float DECELERATION = 0.5f;
 	public static float WIDTH = 32;
 	public static float HEIGHT = 32;
 
-	ArrayList<AmmoEntity> ammos;
-	ArrayList<FireEntity> fires;
-	
-	public ShipEntity(World world, String texturePath, 
+	public ShipEntity(AbstractScene scene, String texturePath, 
 			Vector2 initPosition){
-		super(world, texturePath, initPosition, WIDTH, HEIGHT);
-		ammos = new ArrayList<AmmoEntity>();
-		fires = new ArrayList<FireEntity>();
+		super(scene, texturePath, initPosition, WIDTH, HEIGHT, true);
 	}
 	
 	@Override
@@ -92,26 +88,20 @@ public class ShipEntity extends AbstractEntity {
 		setX(getX() + accelerationX); 
 		
 		if(InputHandler.isClicked(Input.Buttons.LEFT)){
-			ammos.add(new AmmoEntity(world, 
+			scene.addEntity(new LaserEntity(scene, 
 					new Vector2(this.position.x, this.position.y), 
-					getMouseEntityRadAngle()));
+					new Vector2(InputHandler.mouseX, InputHandler.mouseY), this));
 		};
 		if(InputHandler.isClicked(Input.Buttons.RIGHT)){
-			fires.add(new FireEntity(world, 
+			scene.addEntity(new FireEntity(scene, 
 					new Vector2(this.position.x, this.position.y), 
-					getMouseEntityRadAngle()));
+					new Vector2(InputHandler.mouseX, InputHandler.mouseY), this));
 		};
 	}
 	
 	@Override
-	public void update() {
-		super.update();
-		for (AmmoEntity ammoEntity : ammos) {
-			ammoEntity.update();
-		}
-		for (FireEntity fireEntity : fires) {
-			fireEntity.update();
-		}
+	public void update(float dt) {
+		super.update(dt);
 		setAngle(getMouseEntityRadAngle());
 	}
 
@@ -120,21 +110,13 @@ public class ShipEntity extends AbstractEntity {
 		return (float)angleRad;
 	}
 	
-	public ArrayList<AmmoEntity> getAmmos() {
-		return ammos;
-	}
-	
-	public ArrayList<FireEntity> getFires() {
-		return fires;
-	}
-	
 	@Override
 	public Body createBody() {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.position.x = this.position.x;
 		bodyDef.position.y = this.position.y;
-		Body body = world.createBody(bodyDef);
+		Body body = scene.getWorld().createBody(bodyDef);
 		CircleShape circle = new CircleShape();
 		circle.setRadius(0.5f);
 		FixtureDef fixtureDef = new FixtureDef();
@@ -149,6 +131,19 @@ public class ShipEntity extends AbstractEntity {
 		if(other instanceof ShipEntity){
 			this.acceleration.x = - this.acceleration.x;
 			this.acceleration.y = - this.acceleration.y;
+		}else if(other instanceof AmmoEntity){
+			AmmoEntity ammo = (AmmoEntity) other;
+			if(!ammo.getShooter().equals(this)){
+				currentLife -= ammo.getCurrentPower();
+				System.out.println("Ship shot with power: " + ammo.getCurrentPower());
+				if (currentLife <= 0){
+					destroy();
+				}
+			}
 		}
+	}
+	
+	public int getCurrentLife() {
+		return currentLife;
 	}
 }
