@@ -1,5 +1,6 @@
 package com.jflusin.starshipbattle.backend.engine.handlers.inputs;
 
+import com.badlogic.gdx.math.Vector2;
 import com.jflusin.starshipbattle.backend.engine.main.Game;
 
 public class InputHandler {
@@ -57,5 +58,9 @@ public class InputHandler {
 	
 	public static void setKey(int k, boolean value) {
 		keys[k] = value;
+	}
+	
+	public static Vector2 getMousePosition(){
+		return new Vector2(mouseX, mouseY);
 	}
 }

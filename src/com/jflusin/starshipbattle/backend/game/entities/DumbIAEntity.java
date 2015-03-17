@@ -12,7 +12,7 @@ public class DumbIAEntity extends ShipEntity {
 	private AbstractEntity target;
 	
 	public DumbIAEntity(AbstractScene scene, AbstractEntity player) {
-		super(scene, "res/enemy.png", new Vector2(Game.V_WIDTH / 2, Game.V_HEIGHT / 2));
+		super(scene, new Vector2(Game.V_WIDTH / 2, Game.V_HEIGHT / 2));
 		this.target = player;
 	}
 

@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.jflusin.starshipbattle.backend.engine.utils.B2DVars;
 import com.jflusin.starshipbattle.backend.engine.utils.UserData;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
+import com.jflusin.starshipbattle.backend.game.models.AbstractModel;
 
 public abstract class AbstractEntity {
 
@@ -27,10 +28,13 @@ public abstract class AbstractEntity {
 	
 	protected UserData userData;
 	
+	protected AbstractModel model;
+	
 	public AbstractEntity(AbstractScene scene, String texturePath, 
 			Vector2 initPosition, float width, float height, boolean collidable){
 		this.texture = new Texture(Gdx.files.internal(texturePath));
 		this.sprite = new Sprite(texture);
+		sprite.setSize(width, height);
 		this.scene = scene;
 		this.width = width;
 		this.height = height;
@@ -104,12 +108,16 @@ public abstract class AbstractEntity {
 		return userData;
 	}
 	
+	public AbstractModel getModel() {
+		return model;
+	}
+	
 	public void update(float dt){
 		sprite.setPosition(position.x, position.y);
 		sprite.setRotation((float)Math.toDegrees(angle));
 		body.setTransform(new Vector2(
-					(position.x + width) / B2DVars.PPM,
-					(position.y + height) / B2DVars.PPM), angle);
+					(position.x + width/2) / B2DVars.PPM,
+					(position.y + height/2) / B2DVars.PPM), angle);
 	};
 	
 	public void destroy(){

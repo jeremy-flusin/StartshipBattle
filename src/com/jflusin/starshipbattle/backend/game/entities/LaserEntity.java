@@ -7,6 +7,8 @@ public class LaserEntity extends AmmoEntity {
 
 	public LaserEntity(AbstractScene scene, Vector2 position, Vector2 target, AbstractEntity shooter) {
 		super(scene, "res/laser.png", position, target, shooter);
+		this.width = 75f;
+		this.height = 75f;
 	}
 
 }

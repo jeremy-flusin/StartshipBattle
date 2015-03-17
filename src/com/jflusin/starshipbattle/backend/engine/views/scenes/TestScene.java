@@ -7,14 +7,15 @@ import com.jflusin.starshipbattle.backend.engine.main.Game;
 import com.jflusin.starshipbattle.backend.engine.utils.SceneManager;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
 import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
-import com.jflusin.starshipbattle.backend.game.entities.DumbIAEntity;
+import com.jflusin.starshipbattle.backend.game.entities.BlueNexusEntity;
 import com.jflusin.starshipbattle.backend.game.entities.FixedEntity;
-import com.jflusin.starshipbattle.backend.game.entities.ShipEntity;
+import com.jflusin.starshipbattle.backend.game.entities.PlayerEntity;
+import com.jflusin.starshipbattle.backend.game.entities.RedNexusEntity;
+import com.jflusin.starshipbattle.backend.game.enums.Team;
 
 public class TestScene extends AbstractScene {
 	
 	private AbstractEntity player;
-	private AbstractEntity ia;
 	
 	public TestScene(SceneManager sm) {
 		super(sm);
@@ -23,16 +24,15 @@ public class TestScene extends AbstractScene {
 	@Override
 	public void loadContent() {
 		addEntity(new FixedEntity(this, "res/background.jpg", new Vector2(0,0), 1920, 1080));
-		player = new ShipEntity(this, "res/starship_right.png", new Vector2(0, 100));
+		addEntity(new BlueNexusEntity(this));
+		addEntity(new RedNexusEntity(this));
+		player = new PlayerEntity(this, Team.RED, new Vector2(0, 100));
 		addEntity(player);
-		ia = new DumbIAEntity(this, player);
-		addEntity(ia);
 	}
 
 	@Override
 	public void handleInput() {
 		player.handleInput();
-		ia.handleInput();
 	}
 
 	@Override
