@@ -11,7 +11,9 @@ public class StarshipBattle {
 		cfg.title = Game.TITLE + " - Version: " + Game.VERSION;
 		cfg.width = Game.V_WIDTH * Game.SCALE;
 		cfg.height = Game.V_HEIGHT * Game.SCALE;
-
+	    cfg.fullscreen = Game.FULLSCREEN;
+	    cfg.vSyncEnabled = Game.VSYNC;
+	    
 		new LwjglApplication(new Game(), cfg);
 	}
 

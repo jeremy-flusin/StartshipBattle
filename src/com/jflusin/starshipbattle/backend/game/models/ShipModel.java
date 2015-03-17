@@ -55,14 +55,11 @@ public class ShipModel extends AbstractModel {
 			if(currentTurboLevel <= 0){
 				currentTurboLevel = 0;
 			}
-			System.out.println("Using turbo ! " + currentTurboLevel);
 		}else{
 			currentTurboLevel += 1;
 			if(currentTurboLevel >= TURBO_MAX_LEVEL){
 				currentTurboLevel = TURBO_MAX_LEVEL;
 			}
-
-			System.out.println("Turbo reloading! " + currentTurboLevel);
 		}
 	}
 	

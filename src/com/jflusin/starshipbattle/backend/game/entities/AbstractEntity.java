@@ -112,6 +112,10 @@ public abstract class AbstractEntity {
 		return model;
 	}
 	
+	public AbstractScene getScene() {
+		return scene;
+	}
+	
 	public void update(float dt){
 		sprite.setPosition(position.x, position.y);
 		sprite.setRotation((float)Math.toDegrees(angle));

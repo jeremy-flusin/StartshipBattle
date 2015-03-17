@@ -4,7 +4,7 @@ import java.util.Stack;
 
 import com.jflusin.starshipbattle.backend.engine.main.Game;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
-import com.jflusin.starshipbattle.backend.engine.views.scenes.TestScene;
+import com.jflusin.starshipbattle.backend.engine.views.scenes.BattleScene;
 
 public class SceneManager {
 	
@@ -34,7 +34,7 @@ public class SceneManager {
 	
 	private AbstractScene getState(int scene){
 		if (scene == TEST_SCENE){
-			return new TestScene(this);
+			return new BattleScene(this);
 		}
 		return null;
 	}

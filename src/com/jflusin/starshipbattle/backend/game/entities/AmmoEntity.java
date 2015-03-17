@@ -7,22 +7,20 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
+import com.jflusin.starshipbattle.backend.game.interfaces.CanShoot;
 import com.jflusin.starshipbattle.backend.game.utils.AngleUtils;
 
 public class AmmoEntity extends AbstractEntity {
 
-	private static int INITIAL_POWER = 500;
-	private int currentPower = INITIAL_POWER;
+	protected static int INITIAL_POWER = 500;
+	protected int currentPower = INITIAL_POWER;
 	
-	private static float VELOCITY = 5f;
+	protected static float VELOCITY = 15f;
 
-	private static float WIDTH = 64;
-	private static float HEIGHT = 64;
+	private CanShoot shooter;
 	
-	private AbstractEntity shooter;
-	
-	public AmmoEntity(AbstractScene scene, String texturePath, Vector2 position, Vector2 target, AbstractEntity shooter) {
-		super(scene, texturePath, position, WIDTH, HEIGHT, true);
+	public AmmoEntity(AbstractScene scene, String texturePath, float width, float height, Vector2 position, Vector2 target, CanShoot shooter) {
+		super(scene, texturePath, position, width, height, true);
 		setAngle(AngleUtils.getRadAngle(position, target));
 		setX(position.x);
 		setY(position.y);
@@ -70,10 +68,12 @@ public class AmmoEntity extends AbstractEntity {
 
 	@Override
 	public void onContact(AbstractEntity other) {
-		
+		if(!shooter.equals(other) && !(other instanceof AmmoEntity)){
+			destroy();
+		}
 	}
 
-	public AbstractEntity getShooter() {
+	public CanShoot getShooter() {
 		return shooter;
 	}
 	

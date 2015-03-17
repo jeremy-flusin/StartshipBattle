@@ -3,9 +3,9 @@ package com.jflusin.starshipbattle.backend.engine.handlers.inputs;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 
-public class DefaultKeyMapping extends PlayerKeyMapping {
+public class DefaultPlayerOneKeyMapping extends PlayerKeyMapping {
 	
-	public DefaultKeyMapping() {
+	public DefaultPlayerOneKeyMapping() {
 		super();
 		map.put(Actions.UP, Keys.Z);
 		map.put(Actions.DOWN, Keys.S);

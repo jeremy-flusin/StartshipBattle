@@ -17,6 +17,8 @@ public class Game implements ApplicationListener{
 	public static final int V_HEIGHT = 1080;
 	public static final int SCALE = 1;
 	public static final float STEP = 1/60f;
+	public static final boolean FULLSCREEN = false;
+	public static final boolean VSYNC = true;
 	
 	private float accum;
 	

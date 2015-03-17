@@ -4,9 +4,10 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.jflusin.starshipbattle.backend.engine.handlers.inputs.Actions;
-import com.jflusin.starshipbattle.backend.engine.handlers.inputs.DefaultKeyMapping;
 import com.jflusin.starshipbattle.backend.engine.handlers.inputs.InputHandler;
+import com.jflusin.starshipbattle.backend.engine.handlers.inputs.PlayerKeyMapping;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
+import com.jflusin.starshipbattle.backend.game.enums.ShootTypes;
 import com.jflusin.starshipbattle.backend.game.enums.Team;
 
 
@@ -19,11 +20,13 @@ public class PlayerEntity extends ShipEntity {
 	
 	private Team team;
 	
-	private DefaultKeyMapping keys = new DefaultKeyMapping();
+	private PlayerKeyMapping keys;
 	
 	public PlayerEntity(AbstractScene scene, Team team,
-			Vector2 initPosition) {
+			Vector2 initPosition, PlayerKeyMapping keys) {
 		super(scene, initPosition);
+		this.team = team;
+		this.keys = keys;
 	}
 
 	@Override
@@ -101,29 +104,24 @@ public class PlayerEntity extends ShipEntity {
 				accelerationX * getModel().getTurboCoeff() : accelerationX)); 
 		
 		if(InputHandler.isClicked(Input.Buttons.LEFT)){
-			scene.addEntity(new LaserEntity(scene, 
-					new Vector2(this.position.x, this.position.y), 
-					new Vector2(InputHandler.mouseX, InputHandler.mouseY), this));
+			shoot(ShootTypes.PRIMARY, new Vector2(InputHandler.mouseX, InputHandler.mouseY));
 		};
 		if(InputHandler.isClicked(Input.Buttons.RIGHT)){
-			scene.addEntity(new FireEntity(scene, 
-					new Vector2(this.position.x, this.position.y), 
-					new Vector2(InputHandler.mouseX, InputHandler.mouseY), this));
+			shoot(ShootTypes.SECONDARY, new Vector2(InputHandler.mouseX, InputHandler.mouseY));
 		};
 	}
-
+	
 	@Override
 	public void update(float dt) {
-		getModel().updateShield();
-		getModel().updateTurboLevel();
-		if(getModel().isShieldActivated() && getModel().getCurrentShieldPower() > 0){
-			getSprite().setColor(Color.CYAN);
-		}else{
-			getSprite().setColor(Color.WHITE);
-		}
 		super.update(dt);
+		if(Team.BLUE.equals(team)){
+			getSprite().setColor(Color.CYAN);
+		}else if (Team.RED.equals(team)){
+			getSprite().setColor(Color.RED);
+		}
 	}
 	
+	@Override
 	public Team getTeam() {
 		return team;
 	}

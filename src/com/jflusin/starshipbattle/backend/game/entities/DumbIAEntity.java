@@ -5,15 +5,18 @@ import java.util.Random;
 import com.badlogic.gdx.math.Vector2;
 import com.jflusin.starshipbattle.backend.engine.main.Game;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
+import com.jflusin.starshipbattle.backend.game.enums.Team;
 
 public class DumbIAEntity extends ShipEntity {
 
 	public int time = 0;
 	private AbstractEntity target;
+	private Team team;
 	
-	public DumbIAEntity(AbstractScene scene, AbstractEntity player) {
+	public DumbIAEntity(AbstractScene scene, AbstractEntity target, Team team) {
 		super(scene, new Vector2(Game.V_WIDTH / 2, Game.V_HEIGHT / 2));
-		this.target = player;
+		this.target = target;
+		this.team = team;
 	}
 
 	@Override
@@ -45,7 +48,10 @@ public class DumbIAEntity extends ShipEntity {
 		if(r.nextBoolean() && r.nextBoolean() && r.nextBoolean()){
 			scene.addEntity(new FireEntity(scene, new Vector2(position.x, position.y), target.position , this));
 		}
-		
 	}
 	
+	@Override
+	public Team getTeam() {
+		return this.team;
+	}
 }

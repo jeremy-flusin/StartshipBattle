@@ -13,7 +13,7 @@ public class InputHandler {
 	public static boolean[] keys;
 	public static boolean[] prevkeys;
 	
-	public static final int NUM_KEYS = 100;
+	public static final int NUM_KEYS = 200;
 	public static final int NUM_CLICKS = 10;
 
 	static {
