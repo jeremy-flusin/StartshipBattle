@@ -16,7 +16,6 @@ import com.jflusin.starshipbattle.backend.engine.utils.SceneManager;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
 import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
 import com.jflusin.starshipbattle.backend.game.entities.BackgroundEntity;
-import com.jflusin.starshipbattle.backend.game.entities.BlueNexusEntity;
 import com.jflusin.starshipbattle.backend.game.entities.NexusEntity;
 import com.jflusin.starshipbattle.backend.game.entities.PlayerEntity;
 import com.jflusin.starshipbattle.backend.game.entities.RedNexusEntity;

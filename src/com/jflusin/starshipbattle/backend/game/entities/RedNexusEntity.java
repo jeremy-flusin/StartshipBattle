@@ -30,7 +30,7 @@ public class RedNexusEntity extends NexusEntity {
 		for (PlayerEntity player : getScene().getPlayers(Team.BLUE)) {
 			if (player.getX() > Game.V_WIDTH * 75 / 100) {
 				if(getModel().canShoot()){
-					shoot(ShootTypes.PRIMARY, player.position);
+					shootTargetTrack(ShootTypes.PRIMARY, player);
 				}
 			}
 		}

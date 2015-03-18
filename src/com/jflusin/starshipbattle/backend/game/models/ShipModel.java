@@ -82,4 +82,8 @@ public class ShipModel extends AbstractModel {
 	public float getTurboCoeff() {
 		return turboCoeff;
 	}
+
+	public boolean isAlive() {
+		return currentLife > 0;
+	}
 }

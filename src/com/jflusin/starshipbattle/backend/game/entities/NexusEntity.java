@@ -26,8 +26,13 @@ public abstract class NexusEntity extends AbstractEntity implements IsSolid, Can
 	
 	@Override
 	public void shoot(ShootTypes type, Vector2 target) {
+
+	}
+	
+	@Override
+	public void shootTargetTrack(ShootTypes type, AbstractEntity target) {
 		scene.addEntity(new NexusShootEntity(
-				scene, new Vector2(0, 0), target, this));
+				scene, new Vector2(getX(), getY() + height/2 - 40), target, this));
 		getModel().setShootCooldown(0);
 	}
 	

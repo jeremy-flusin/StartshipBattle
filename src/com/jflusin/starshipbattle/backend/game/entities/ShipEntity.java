@@ -15,36 +15,38 @@ import com.jflusin.starshipbattle.backend.game.interfaces.IsSolid;
 import com.jflusin.starshipbattle.backend.game.models.ShipModel;
 import com.jflusin.starshipbattle.backend.game.utils.AngleUtils;
 
-public abstract class ShipEntity extends AbstractEntity implements IsSolid, CanShoot{
-	
+public abstract class ShipEntity extends AbstractEntity implements IsSolid,
+		CanShoot {
+
 	public static float WIDTH = 80;
 	public static float HEIGHT = 67;
 
-	public ShipEntity(AbstractScene scene, Vector2 initPosition){
+	public ShipEntity(AbstractScene scene, Vector2 initPosition) {
 		super(scene, "res/ship.png", initPosition, WIDTH, HEIGHT, true);
 		this.model = new ShipModel();
 	}
-	
+
 	@Override
 	public void handleInput() {
-		
-		
+
 	}
-	
+
 	@Override
 	public void update(float dt) {
 		super.update(dt);
-		setAngle(AngleUtils.getRadAngle(position, InputHandler.getMousePosition()));
+		setAngle(AngleUtils.getRadAngle(position,
+				InputHandler.getMousePosition()));
 		getModel().updateShield();
 		getModel().updateTurboLevel();
-		if(getModel().isShieldActivated() && getModel().getCurrentShieldPower() > 0){
-			//FIXME: does not work
+		if (getModel().isShieldActivated()
+				&& getModel().getCurrentShieldPower() > 0) {
+			// FIXME: does not work
 			getSprite().setColor(Color.MAGENTA);
-		}else{
+		} else {
 			getSprite().setColor(Color.WHITE);
 		}
 	}
-	
+
 	@Override
 	public Body createBody() {
 		BodyDef bodyDef = new BodyDef();
@@ -63,14 +65,14 @@ public abstract class ShipEntity extends AbstractEntity implements IsSolid, CanS
 
 	@Override
 	public void onContact(AbstractEntity other) {
-		if(other instanceof IsSolid){
-			this.acceleration.x = - this.acceleration.x;
-			this.acceleration.y = - this.acceleration.y;
-		}else if(other instanceof AmmoEntity){
+		if (other instanceof IsSolid) {
+			this.acceleration.x = -this.acceleration.x;
+			this.acceleration.y = -this.acceleration.y;
+		} else if (other instanceof AmmoEntity) {
 			AmmoEntity ammo = (AmmoEntity) other;
-			if(!ammo.getShooter().equals(this)){
+			if (!ammo.getShooter().getTeam().equals(getTeam())) {
 				getModel().takeDamage(ammo.getCurrentPower());
-				if(getModel().getCurrentLife() <= 0){
+				if (getModel().getCurrentLife() <= 0) {
 					destroy();
 				}
 			}
@@ -78,19 +80,22 @@ public abstract class ShipEntity extends AbstractEntity implements IsSolid, CanS
 	}
 
 	public ShipModel getModel() {
-		return (ShipModel)super.getModel();
+		return (ShipModel) super.getModel();
 	}
 
 	@Override
 	public void shoot(ShootTypes type, Vector2 target) {
-		if(ShootTypes.PRIMARY.equals(type)){
-			scene.addEntity(new LaserEntity(scene, 
-					new Vector2(this.position.x, this.position.y), 
-					target, this));
-		}else if(ShootTypes.SECONDARY.equals(type)){
-			scene.addEntity(new FireEntity(scene, 
-					new Vector2(this.position.x, this.position.y), 
-					target, this));
+		if (ShootTypes.PRIMARY.equals(type)) {
+			scene.addEntity(new LaserEntity(scene, new Vector2(this.position.x,
+					this.position.y), target, this));
+		} else if (ShootTypes.SECONDARY.equals(type)) {
+			scene.addEntity(new FireEntity(scene, new Vector2(this.position.x,
+					this.position.y), target, this));
 		}
+	}
+	
+	@Override
+	public void shootTargetTrack(ShootTypes type, AbstractEntity target) {
+		
 	}
 }

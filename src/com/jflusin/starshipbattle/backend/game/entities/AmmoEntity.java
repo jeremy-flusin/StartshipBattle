@@ -15,7 +15,7 @@ public class AmmoEntity extends AbstractEntity {
 	protected static int INITIAL_POWER = 500;
 	protected int currentPower = INITIAL_POWER;
 	
-	protected static float VELOCITY = 15f;
+	protected static float VELOCITY = 5f;
 
 	private CanShoot shooter;
 	

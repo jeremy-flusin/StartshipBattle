@@ -5,6 +5,7 @@ import java.util.Random;
 import com.badlogic.gdx.math.Vector2;
 import com.jflusin.starshipbattle.backend.engine.main.Game;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
+import com.jflusin.starshipbattle.backend.game.enums.ShootTypes;
 import com.jflusin.starshipbattle.backend.game.enums.Team;
 
 public class DumbIAEntity extends ShipEntity {

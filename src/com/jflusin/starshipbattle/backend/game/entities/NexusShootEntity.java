@@ -7,16 +7,18 @@ import com.jflusin.starshipbattle.backend.game.utils.AngleUtils;
 
 public class NexusShootEntity extends AmmoEntity {
 
-	private Vector2 targetToFollow;
+	private PlayerEntity targetToFollow;
 	
-	public NexusShootEntity(AbstractScene scene, Vector2 position, Vector2 target, CanShoot shooter) {
-		super(scene, "res/energy.png", 60, 60, position, target, shooter);
-		targetToFollow = target;
-		setAngle(AngleUtils.getRadAngle(position, targetToFollow));
+	public NexusShootEntity(AbstractScene scene, Vector2 position, AbstractEntity target, CanShoot shooter) {
+		super(scene, "res/laser.png", 60, 60, position, target.position, shooter);
+		targetToFollow = (PlayerEntity)target;
 	}
 
 	@Override
 	public void update(float dt) {
+		if(targetToFollow.getModel().isAlive()){
+			setAngle(AngleUtils.getRadAngle(position, targetToFollow.position));
+		}
 		super.update(dt);
 	}
 	
