@@ -5,7 +5,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
 
 
-public class FixedEntity extends AbstractEntity {
+public class FixedEntity extends AbstractTexturedEntity {
 
 	public FixedEntity(AbstractScene scene, String texturePath, 
 			Vector2 initPosition, float width, float height) {

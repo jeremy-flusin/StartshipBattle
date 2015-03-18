@@ -15,7 +15,7 @@ import com.jflusin.starshipbattle.backend.game.interfaces.IsSolid;
 import com.jflusin.starshipbattle.backend.game.models.ShipModel;
 import com.jflusin.starshipbattle.backend.game.utils.AngleUtils;
 
-public abstract class ShipEntity extends AbstractEntity implements IsSolid,
+public abstract class ShipEntity extends AbstractTexturedEntity implements IsSolid,
 		CanShoot {
 
 	public static float WIDTH = 80;
@@ -41,9 +41,9 @@ public abstract class ShipEntity extends AbstractEntity implements IsSolid,
 		if (getModel().isShieldActivated()
 				&& getModel().getCurrentShieldPower() > 0) {
 			// FIXME: does not work
-			getSprite().setColor(Color.MAGENTA);
+			getTexturedSprite().getSprite().setColor(Color.MAGENTA);
 		} else {
-			getSprite().setColor(Color.WHITE);
+			getTexturedSprite().getSprite().setColor(Color.WHITE);
 		}
 	}
 
@@ -86,10 +86,10 @@ public abstract class ShipEntity extends AbstractEntity implements IsSolid,
 	@Override
 	public void shoot(ShootTypes type, Vector2 target) {
 		if (ShootTypes.PRIMARY.equals(type)) {
-			scene.addEntity(new LaserEntity(scene, new Vector2(this.position.x,
+			scene.addTexturedEntity(new LaserEntity(scene, new Vector2(this.position.x,
 					this.position.y), target, this));
 		} else if (ShootTypes.SECONDARY.equals(type)) {
-			scene.addEntity(new FireEntity(scene, new Vector2(this.position.x,
+			scene.addTexturedEntity(new FireEntity(scene, new Vector2(this.position.x,
 					this.position.y), target, this));
 		}
 	}

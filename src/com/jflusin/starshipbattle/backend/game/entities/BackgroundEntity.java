@@ -8,7 +8,7 @@ public class BackgroundEntity extends FixedEntity {
 
 	public BackgroundEntity(AbstractScene scene) {
 		super(scene, "res/background.jpg", new Vector2(0,0), 1920, 1080);
-		getSprite().setColor(new Color(1,1,1,0.6f));
+		getTexturedSprite().getSprite().setColor(new Color(1,1,1,0.6f));
 	}
 
 }

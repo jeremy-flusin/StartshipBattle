@@ -2,7 +2,7 @@ package com.jflusin.starshipbattle.backend.game.models;
 
 public class ShipModel extends AbstractModel {
 
-	protected static int MAX_LIFE = 50;
+	public static int MAX_LIFE = 50;
 	protected int currentLife = MAX_LIFE;
 	
 	protected static int SHIELD_MAX_POWER = 1000;
@@ -24,6 +24,9 @@ public class ShipModel extends AbstractModel {
 
 	public void takeDamage(int damage){
 		currentLife -= damage;
+		if(currentLife < 0){
+			currentLife = 0;
+		}
 	}
 
 	public void setShieldActivated(boolean shield) {

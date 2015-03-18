@@ -7,7 +7,7 @@ import com.jflusin.starshipbattle.backend.game.interfaces.CanShoot;
 import com.jflusin.starshipbattle.backend.game.interfaces.IsSolid;
 import com.jflusin.starshipbattle.backend.game.models.NexusModel;
 
-public abstract class NexusEntity extends AbstractEntity implements IsSolid, CanShoot{
+public abstract class NexusEntity extends AbstractTexturedEntity implements IsSolid, CanShoot{
 	
 	public NexusEntity(BattleScene scene, String texturePath,
 			Vector2 initPosition, float width, float height, boolean collidable) {
@@ -31,7 +31,7 @@ public abstract class NexusEntity extends AbstractEntity implements IsSolid, Can
 	
 	@Override
 	public void shootTargetTrack(ShootTypes type, AbstractEntity target) {
-		scene.addEntity(new NexusShootEntity(
+		scene.addTexturedEntity(new NexusShootEntity(
 				scene, new Vector2(getX(), getY() + height/2 - 40), target, this));
 		getModel().setShootCooldown(0);
 	}

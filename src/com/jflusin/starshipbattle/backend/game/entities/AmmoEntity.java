@@ -10,7 +10,7 @@ import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
 import com.jflusin.starshipbattle.backend.game.interfaces.CanShoot;
 import com.jflusin.starshipbattle.backend.game.utils.AngleUtils;
 
-public class AmmoEntity extends AbstractEntity {
+public class AmmoEntity extends AbstractTexturedEntity {
 
 	protected static int INITIAL_POWER = 500;
 	protected int currentPower = INITIAL_POWER;
@@ -43,7 +43,7 @@ public class AmmoEntity extends AbstractEntity {
 		setX(getX() + velX);
 		setY(getY() + velY);
 		currentPower--;
-		getSprite().setAlpha((float)currentPower / (float)INITIAL_POWER);
+		getTexturedSprite().getSprite().setAlpha((float)currentPower / (float)INITIAL_POWER);
 		
 		if(currentPower <= 0){
 			destroy();

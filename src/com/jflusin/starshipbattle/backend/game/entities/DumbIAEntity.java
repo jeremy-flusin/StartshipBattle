@@ -5,7 +5,6 @@ import java.util.Random;
 import com.badlogic.gdx.math.Vector2;
 import com.jflusin.starshipbattle.backend.engine.main.Game;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
-import com.jflusin.starshipbattle.backend.game.enums.ShootTypes;
 import com.jflusin.starshipbattle.backend.game.enums.Team;
 
 public class DumbIAEntity extends ShipEntity {
@@ -44,10 +43,10 @@ public class DumbIAEntity extends ShipEntity {
 		}
 		
 		if(r.nextBoolean() && r.nextBoolean() && r.nextBoolean()){
-			scene.addEntity(new LaserEntity(scene, new Vector2(position.x, position.y), target.position , this));
+			scene.addTexturedEntity(new LaserEntity(scene, new Vector2(position.x, position.y), target.position , this));
 		}
 		if(r.nextBoolean() && r.nextBoolean() && r.nextBoolean()){
-			scene.addEntity(new FireEntity(scene, new Vector2(position.x, position.y), target.position , this));
+			scene.addTexturedEntity(new FireEntity(scene, new Vector2(position.x, position.y), target.position , this));
 		}
 	}
 	

@@ -14,20 +14,19 @@ import com.jflusin.starshipbattle.backend.engine.handlers.inputs.DefaultPlayerTw
 import com.jflusin.starshipbattle.backend.engine.main.Game;
 import com.jflusin.starshipbattle.backend.engine.utils.SceneManager;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
-import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
+import com.jflusin.starshipbattle.backend.game.entities.AbstractRenderedEntity;
+import com.jflusin.starshipbattle.backend.game.entities.AbstractTexturedEntity;
 import com.jflusin.starshipbattle.backend.game.entities.BackgroundEntity;
 import com.jflusin.starshipbattle.backend.game.entities.NexusEntity;
+import com.jflusin.starshipbattle.backend.game.entities.NexusRedEntity;
 import com.jflusin.starshipbattle.backend.game.entities.PlayerEntity;
-import com.jflusin.starshipbattle.backend.game.entities.RedNexusEntity;
 import com.jflusin.starshipbattle.backend.game.enums.Team;
 
 public class BattleScene extends AbstractScene {
-
 	private PlayerEntity playerBlue;
 	private PlayerEntity playerRed;
 	private NexusEntity nexusRed;
-	private NexusEntity nexusBlue;
-	
+	private BackgroundEntity background;
 	private MultiMap<Team, PlayerEntity> players;
 
 	public BattleScene(SceneManager sm) {
@@ -36,25 +35,22 @@ public class BattleScene extends AbstractScene {
 
 	@Override
 	public void loadContent() {
-		addEntity(new BackgroundEntity(this));
-//		nexusBlue = new BlueNexusEntity(this);
-		nexusRed = new RedNexusEntity(this);
+		background = new BackgroundEntity(this);
+		nexusRed = new NexusRedEntity(this);
 		playerBlue = new PlayerEntity(this, Team.BLUE, new Vector2(300, 500), new DefaultPlayerOneKeyMapping());
 		playerRed = new PlayerEntity(this, Team.RED, new Vector2(1500, 500), new DefaultPlayerTwoKeyMapping());
 		players = new MultiValueMap<Team, PlayerEntity>();
 		players.put(Team.BLUE, playerBlue);
 		players.put(Team.RED, playerRed);
-		addEntity(playerBlue);
-		addEntity(playerRed);
-//		addEntity(nexusBlue);
-		addEntity(nexusRed);
+		addTexturedEntity(playerBlue);
+		addTexturedEntity(playerRed);
+		addTexturedEntity(nexusRed);
 	}
 
 	@Override
 	public void handleInput() {
 		playerBlue.handleInput();
 		playerRed.handleInput();
-//		nexusBlue.handleInput();
 		nexusRed.handleInput();
 	}
 
@@ -63,11 +59,16 @@ public class BattleScene extends AbstractScene {
 		Gdx.gl20.glClearColor(0, 0, 0, 0);
 		Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		sb.begin();
-
-		for (AbstractEntity entity : entities) {
-			entity.getSprite().draw(sb);
+		background.getTexturedSprite().getSprite().draw(sb);
+		sb.end();
+		for (AbstractRenderedEntity entity : renderedEntities) {
+			entity.render(sr);
 		}
-
+		sr.setProjectionMatrix(cam.combined);
+		sb.begin();
+		for (AbstractTexturedEntity entity : texturedEntities) {
+			entity.getTexturedSprite().getSprite().draw(sb);
+		}
 		sb.end();
 		sb.setProjectionMatrix(cam.combined);
 		if (Game.IS_DEBUG) {
@@ -77,13 +78,11 @@ public class BattleScene extends AbstractScene {
 
 	@Override
 	public void dispose() {
-
 	}
 
 	@SuppressWarnings("unchecked")
-	//TODO: is this really necessary ?
+	// TODO: is this really necessary ?
 	public ArrayList<PlayerEntity> getPlayers(Team team) {
 		return new ArrayList<PlayerEntity>((Collection<PlayerEntity>) players.get(team));
 	}
-
 }

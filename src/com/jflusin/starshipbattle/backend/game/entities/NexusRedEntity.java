@@ -15,14 +15,14 @@ import com.jflusin.starshipbattle.backend.game.enums.Team;
 import com.jflusin.starshipbattle.backend.game.interfaces.CanShoot;
 
 //FIXME: Dirty hacks because of sprite, should be one class
-public class RedNexusEntity extends NexusEntity {
+public class NexusRedEntity extends NexusEntity {
 
 	public static Vector2 position = new Vector2(Game.V_WIDTH - 300, 300);
 
-	public RedNexusEntity(BattleScene scene) {
+	public NexusRedEntity(BattleScene scene) {
 		super(scene, "res/nexus-left.png", position, 300, 600, true);
-		getSprite().setPosition(position.x, position.y);
-		getSprite().setColor(Color.RED);
+		getTexturedSprite().getSprite().setPosition(position.x, position.y);
+		getTexturedSprite().getSprite().setColor(Color.RED);
 	}
 
 	@Override
@@ -40,8 +40,8 @@ public class RedNexusEntity extends NexusEntity {
 	public Body createBody() {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
-		bodyDef.position.x = BlueNexusEntity.position.x;
-		bodyDef.position.y = BlueNexusEntity.position.y;
+		bodyDef.position.x = NexusBlueEntity.position.x;
+		bodyDef.position.y = NexusBlueEntity.position.y;
 		Body body = scene.getWorld().createBody(bodyDef);
 		CircleShape circle = new CircleShape();
 		circle.setRadius(2.5f);

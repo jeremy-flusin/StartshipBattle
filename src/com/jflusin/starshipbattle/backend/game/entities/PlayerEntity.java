@@ -22,11 +22,15 @@ public class PlayerEntity extends ShipEntity {
 	
 	private PlayerKeyMapping keys;
 	
+	private HPBarEntity hpBar;
+	
 	public PlayerEntity(AbstractScene scene, Team team,
 			Vector2 initPosition, PlayerKeyMapping keys) {
 		super(scene, initPosition);
 		this.team = team;
 		this.keys = keys;
+		hpBar = new HPBarEntity(scene, this);
+		scene.addRenderedEntity(hpBar);
 	}
 
 	@Override
@@ -115,9 +119,9 @@ public class PlayerEntity extends ShipEntity {
 	public void update(float dt) {
 		super.update(dt);
 		if(Team.BLUE.equals(team)){
-			getSprite().setColor(Color.CYAN);
+			getTexturedSprite().getSprite().setColor(Color.CYAN);
 		}else if (Team.RED.equals(team)){
-			getSprite().setColor(Color.RED);
+			getTexturedSprite().getSprite().setColor(Color.RED);
 		}
 	}
 	
