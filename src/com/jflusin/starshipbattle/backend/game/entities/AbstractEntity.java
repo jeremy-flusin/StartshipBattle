@@ -1,8 +1,5 @@
 package com.jflusin.starshipbattle.backend.game.entities;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.jflusin.starshipbattle.backend.engine.utils.B2DVars;
@@ -14,9 +11,6 @@ public abstract class AbstractEntity {
 
 	protected Vector2 position;
 	protected Vector2 acceleration;
-	
-	protected Texture texture;
-	protected Sprite sprite;
 	
 	protected AbstractScene scene;
 	protected Body body;
@@ -30,11 +24,8 @@ public abstract class AbstractEntity {
 	
 	protected AbstractModel model;
 	
-	public AbstractEntity(AbstractScene scene, String texturePath, 
+	public AbstractEntity(AbstractScene scene, 
 			Vector2 initPosition, float width, float height, boolean collidable){
-		this.texture = new Texture(Gdx.files.internal(texturePath));
-		this.sprite = new Sprite(texture);
-		sprite.setSize(width, height);
 		this.scene = scene;
 		this.width = width;
 		this.height = height;
@@ -44,10 +35,6 @@ public abstract class AbstractEntity {
 		this.collidable = collidable;
 	}
 	
-	public Sprite getSprite() {
-		return sprite;
-	}
-
 	public void setPosition(Vector2 position){
 		this.position = position;
 	}
@@ -58,6 +45,14 @@ public abstract class AbstractEntity {
 	
 	public void setY(float y){
 		position.y = y;
+	}
+	
+	public Vector2 getPosition() {
+		return position;
+	}
+	
+	public Vector2 getAcceleration() {
+		return acceleration;
 	}
 	
 	public float getX(){
@@ -117,8 +112,6 @@ public abstract class AbstractEntity {
 	}
 	
 	public void update(float dt){
-		sprite.setPosition(position.x, position.y);
-		sprite.setRotation((float)Math.toDegrees(angle));
 		body.setTransform(new Vector2(
 					(position.x + width/2) / B2DVars.PPM,
 					(position.y + height/2) / B2DVars.PPM), angle);
