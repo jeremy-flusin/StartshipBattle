@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -18,8 +17,6 @@ import com.jflusin.starshipbattle.backend.engine.utils.ContentManager;
 import com.jflusin.starshipbattle.backend.engine.utils.SceneManager;
 import com.jflusin.starshipbattle.backend.engine.utils.UserData;
 import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
-import com.jflusin.starshipbattle.backend.game.entities.AbstractTexturedEntity;
-import com.jflusin.starshipbattle.backend.game.entities.info.bars.AbstractRenderedEntity;
 
 public abstract class AbstractScene {
 	
@@ -33,23 +30,18 @@ public abstract class AbstractScene {
 	protected SceneManager sm;
 	protected Game game;
 	protected SpriteBatch sb;
-	protected ShapeRenderer sr;
 	protected OrthographicCamera cam;
 	protected ContentManager cm;
 	
 	protected World world;
 
-	protected ArrayList<AbstractTexturedEntity> texturedEntities;
-	protected ArrayList<AbstractRenderedEntity> renderedEntities;
 	protected ArrayList<AbstractEntity> entities;
-	
 	protected AbstractEntity player;
 	
 	public AbstractScene(SceneManager sm) {
 		this.sm = sm;
 		game = sm.getGame();
 		sb = game.getSpriteBatch();
-		sr = game.getShapeRenderer();
 		cam = game.getCamera();
 		cm = new ContentManager();
 		
@@ -64,12 +56,7 @@ public abstract class AbstractScene {
 		contactHandler = new ContactHandler();
 		world = new World(new Vector2(0f, 0f), true);
 		world.setContactListener(contactHandler);
-		
-		//Keep trace of entities
-		texturedEntities = new ArrayList<AbstractTexturedEntity>();
-		renderedEntities = new ArrayList<AbstractRenderedEntity>();
 		entities = new ArrayList<AbstractEntity>();
-		
 		loadContent();
 	}
 
@@ -101,13 +88,13 @@ public abstract class AbstractScene {
 	
 	private void clearScene() {
 		ArrayList<AbstractEntity> toDestroy = new ArrayList<AbstractEntity>();
-		for (AbstractEntity entity : texturedEntities) {
+		for (AbstractEntity entity : entities) {
 			if(UserData.TO_DESTROY.equals(entity.getUserData())){
 				toDestroy.add(entity);
 			}
 		}
 		for (AbstractEntity entity : toDestroy) {
-			texturedEntities.remove(entity);
+			entities.remove(entity);
 		}
 	}
 
@@ -118,38 +105,15 @@ public abstract class AbstractScene {
 	public World getWorld() {
 		return world;
 	}
-
-	public void addTexturedEntity(AbstractTexturedEntity entity) {
-		addEntity(entity);
-		this.texturedEntities.add(entity);
-	}
 	
-	public void removeTexturedEntity(AbstractTexturedEntity entity){
-		removeEntity(entity);
-		this.texturedEntities.remove(entity);
-	}
-	
-	public void addRenderedEntity(AbstractRenderedEntity entity) {
-		addEntity(entity);
-		this.renderedEntities.add(entity);
-	}
-	
-	public void removeTexturedEntity(AbstractEntity entity){
-		removeEntity(entity);
-		this.texturedEntities.remove(entity);
-	}
-	
-	private void addEntity(AbstractEntity entity){
+	public void addEntity(AbstractEntity entity) {
 		this.entities.add(entity);
 		if(entity.isCollidable()){
 			contactHandler.registerEntity(entity);
 		}
-	}	
+	}
 	
-	private void removeEntity(AbstractEntity entity){
+	public void removeEntity(AbstractEntity entity){
 		this.entities.remove(entity);
-		if(entity.isCollidable()){
-			contactHandler.unregisterEntity(entity);
-		}
 	}
 }
