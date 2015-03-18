@@ -126,6 +126,12 @@ public class PlayerEntity extends ShipEntity {
 	}
 	
 	@Override
+	public void destroy() {
+		super.destroy();
+		hpBar.destroy();
+	}
+	
+	@Override
 	public Team getTeam() {
 		return team;
 	}

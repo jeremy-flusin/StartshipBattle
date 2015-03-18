@@ -111,7 +111,9 @@ public abstract class AbstractEntity {
 	};
 
 	public void destroy() {
-		body.setUserData(UserData.TO_DESTROY);
+		if(body != null){
+			body.setUserData(UserData.TO_DESTROY);
+		}
 		userData = UserData.TO_DESTROY;
 	}
 
