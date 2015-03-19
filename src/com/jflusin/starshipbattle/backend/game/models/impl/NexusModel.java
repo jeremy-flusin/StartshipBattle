@@ -8,6 +8,7 @@ public class NexusModel extends AbstractModel{
 	protected int currentHP = MAX_HP;
 	protected static int MAX_COOLDOWN = 20;
 	protected int shootCooldown = MAX_COOLDOWN;
+	protected boolean isVulnerable = false;
 	
 	public NexusModel() {
 
@@ -28,13 +29,19 @@ public class NexusModel extends AbstractModel{
 	}
 	
 	public void takeDamage(int damage){
-		currentHP -= damage;
-		if(currentHP < 0){
-			currentHP = 0;
+		if(isVulnerable){
+			currentHP -= damage;
+			if(currentHP < 0){
+				currentHP = 0;
+			}
 		}
 	}
 	
 	public int getCurrentHP() {
 		return currentHP;
+	}
+
+	public void setVulnerable(boolean nexusVulnerable) {
+		this.isVulnerable = nexusVulnerable;
 	}
 }

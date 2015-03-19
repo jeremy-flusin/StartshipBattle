@@ -64,4 +64,5 @@ public class NexusRedEntity extends NexusEntity {
 	protected float getMaxXToWatch() {
 		return Game.V_WIDTH;
 	}
+	
 }

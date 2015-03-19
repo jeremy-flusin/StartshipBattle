@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.jflusin.starshipbattle.backend.engine.handlers.inputs.Actions;
 import com.jflusin.starshipbattle.backend.engine.handlers.inputs.InputHandler;
 import com.jflusin.starshipbattle.backend.engine.handlers.inputs.PlayerKeyMapping;
+import com.jflusin.starshipbattle.backend.engine.main.Game;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
 import com.jflusin.starshipbattle.backend.game.entities.rendered.info.bars.impl.HPBarEntity;
 import com.jflusin.starshipbattle.backend.game.entities.rendered.info.bars.impl.ShieldBarEntity;
@@ -41,6 +42,11 @@ public class ShipPlayerEntity extends AbstractShipPlayerEntity {
 
 	@Override
 	public void handleInput() {
+		
+		//Dirty
+		if(InputHandler.isDown(Input.Keys.ESCAPE)){
+			Game.PAUSE = true;
+		}
 		
 		if(InputHandler.isDown(keys.getKeyForAction(Actions.TURBO))){
 			getModel().setTurboActivated(true);
@@ -142,5 +148,4 @@ public class ShipPlayerEntity extends AbstractShipPlayerEntity {
 	public Team getTeam() {
 		return team;
 	}
-	
 }

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.jflusin.starshipbattle.backend.engine.handlers.inputs.InputHandler;
 import com.jflusin.starshipbattle.backend.engine.handlers.inputs.InputProcessor;
 import com.jflusin.starshipbattle.backend.engine.utils.SceneManager;
+import com.jflusin.starshipbattle.backend.engine.views.scenes.SceneData;
 
 public class Game implements ApplicationListener {
 	public static final boolean IS_DEBUG = false;
@@ -19,6 +20,7 @@ public class Game implements ApplicationListener {
 	public static final float STEP = 1 / 60f;
 	public static final boolean FULLSCREEN = false;
 	public static final boolean VSYNC = true;
+	public static boolean PAUSE = false;
 	private float accum;
 	protected SpriteBatch sb;
 	protected ShapeRenderer sr;
@@ -34,7 +36,7 @@ public class Game implements ApplicationListener {
 		sb = new SpriteBatch();
 		sr = new ShapeRenderer();
 		sm = new SceneManager(this);
-		sm.setState(SceneManager.TEST_SCENE);
+		sm.setState(SceneManager.BATTLE_SCENE, new SceneData());
 		Gdx.input.setInputProcessor(new InputProcessor());
 	}
 

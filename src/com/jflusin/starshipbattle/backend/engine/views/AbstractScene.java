@@ -17,6 +17,7 @@ import com.jflusin.starshipbattle.backend.engine.main.Game;
 import com.jflusin.starshipbattle.backend.engine.utils.ContentManager;
 import com.jflusin.starshipbattle.backend.engine.utils.SceneManager;
 import com.jflusin.starshipbattle.backend.engine.utils.UserData;
+import com.jflusin.starshipbattle.backend.engine.views.scenes.SceneData;
 import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
 import com.jflusin.starshipbattle.backend.game.entities.rendered.AbstractRenderedEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.AbstractTexturedEntity;
@@ -37,9 +38,11 @@ public abstract class AbstractScene {
 	protected ArrayList<AbstractRenderedEntity> renderedEntities;
 	protected ArrayList<AbstractEntity> entities;
 	protected AbstractEntity player;
-
-	public AbstractScene(SceneManager sm) {
+	protected SceneData sd;
+	
+	public AbstractScene(SceneManager sm, SceneData sd) {
 		this.sm = sm;
+		this.sd = sd;
 		game = sm.getGame();
 		sb = game.getSpriteBatch();
 		sr = game.getShapeRenderer();
@@ -70,12 +73,14 @@ public abstract class AbstractScene {
 	public abstract void dispose();
 
 	public void update(float dt) {
-		clearWorld();
-		clearScene();
-		world.step(dt, 6, 2);
-		handleInput();
-		for (AbstractEntity entity : entities) {
-			entity.update(dt);
+		if(!Game.PAUSE){
+			clearWorld();
+			clearScene();
+			world.step(dt, 6, 2);
+			handleInput();
+			for (AbstractEntity entity : entities) {
+				entity.update(dt);
+			}
 		}
 	}
 

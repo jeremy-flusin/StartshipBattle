@@ -25,14 +25,15 @@ import com.jflusin.starshipbattle.backend.game.enums.Team;
 
 public class BattleScene extends AbstractScene {
 	private ShipPlayerEntity playerBlue;
+	private ShipPlayerEntity playerBlue2;
 	private ShipPlayerEntity playerRed;
 	private NexusEntity nexusBlue;
 	private NexusEntity nexusRed;
 	private BackgroundEntity background;
 	private MultiMap<Team, ShipPlayerEntity> players;
-
-	public BattleScene(SceneManager sm) {
-		super(sm);
+	private BattleSceneWatcher bsw;
+	public BattleScene(SceneManager sm, SceneData sd) {
+		super(sm, sd);
 	}
 
 	@Override
@@ -41,14 +42,18 @@ public class BattleScene extends AbstractScene {
 		nexusBlue = new NexusBlueEntity(this);
 		nexusRed = new NexusRedEntity(this);
 		playerBlue = new ShipPlayerEntity(this, Team.BLUE, new Vector2(300, 500), new DefaultPlayerOneKeyMapping());
+		playerBlue2 = new ShipPlayerEntity(this, Team.BLUE, new Vector2(250, 300), new DefaultPlayerOneKeyMapping());
 		playerRed = new ShipPlayerEntity(this, Team.RED, new Vector2(1500, 500), new DefaultPlayerTwoKeyMapping());
 		players = new MultiValueMap<Team, ShipPlayerEntity>();
 		players.put(Team.BLUE, playerBlue);
+		players.put(Team.BLUE, playerBlue2);
 		players.put(Team.RED, playerRed);
 		addTexturedEntity(playerBlue);
+		addTexturedEntity(playerBlue2);
 		addTexturedEntity(playerRed);
 		addTexturedEntity(nexusBlue);
 		addTexturedEntity(nexusRed);
+		bsw = new BattleSceneWatcher(sm, this);
 	}
 
 	@Override
@@ -82,6 +87,12 @@ public class BattleScene extends AbstractScene {
 	}
 
 	@Override
+	public void update(float dt) {
+		super.update(dt);
+		bsw.watch();
+	}
+	
+	@Override
 	public void dispose() {
 	}
 
@@ -89,5 +100,13 @@ public class BattleScene extends AbstractScene {
 	// TODO: is this really necessary ?
 	public ArrayList<ShipPlayerEntity> getPlayers(Team team) {
 		return new ArrayList<ShipPlayerEntity>((Collection<ShipPlayerEntity>) players.get(team));
+	}
+	
+	public NexusEntity getNexusBlue() {
+		return nexusBlue;
+	}
+	
+	public NexusEntity getNexusRed() {
+		return nexusRed;
 	}
 }
