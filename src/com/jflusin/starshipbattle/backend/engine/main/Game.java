@@ -10,7 +10,7 @@ import com.jflusin.starshipbattle.backend.engine.handlers.inputs.InputProcessor;
 import com.jflusin.starshipbattle.backend.engine.utils.SceneManager;
 
 public class Game implements ApplicationListener {
-	public static final boolean IS_DEBUG = true;
+	public static final boolean IS_DEBUG = false;
 	public static final String TITLE = "StarshipBattle";
 	public static final String VERSION = "p-o-c";
 	public static final int V_WIDTH = 1920;

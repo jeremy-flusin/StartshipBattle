@@ -12,8 +12,6 @@ import com.jflusin.starshipbattle.backend.engine.utils.B2DVars;
 import com.jflusin.starshipbattle.backend.engine.views.scenes.BattleScene;
 import com.jflusin.starshipbattle.backend.game.entities.rendered.info.bars.impl.NexusRedHPBarEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.nexus.NexusEntity;
-import com.jflusin.starshipbattle.backend.game.entities.textured.player.impl.ShipPlayerEntity;
-import com.jflusin.starshipbattle.backend.game.enums.ShootTypes;
 import com.jflusin.starshipbattle.backend.game.enums.Team;
 
 //FIXME: Dirty hacks because of sprite, should be one class
@@ -27,17 +25,6 @@ public class NexusRedEntity extends NexusEntity {
 		getTexturedSprite().getSprite().setColor(Color.RED);
 		hpBar = new NexusRedHPBarEntity(scene, this);
 		scene.addRenderedEntity(hpBar);
-	}
-
-	@Override
-	public void handleInput() {
-		for (ShipPlayerEntity player : getScene().getPlayers(Team.BLUE)) {
-			if (player.getX() > Game.V_WIDTH * 75 / 100) {
-				if(getModel().canShoot()){
-					shootTargetTrack(ShootTypes.PRIMARY, player);
-				}
-			}
-		}
 	}
 
 	@Override
@@ -66,5 +53,15 @@ public class NexusRedEntity extends NexusEntity {
 	@Override
 	public Team getTeam() {
 		return Team.RED;
+	}
+
+	@Override
+	protected float getMinXToWatch() {
+		return  Game.V_WIDTH * 75 / 100;
+	}
+
+	@Override
+	protected float getMaxXToWatch() {
+		return Game.V_WIDTH;
 	}
 }

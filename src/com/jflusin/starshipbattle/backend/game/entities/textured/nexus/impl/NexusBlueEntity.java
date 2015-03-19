@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.jflusin.starshipbattle.backend.engine.main.Game;
 import com.jflusin.starshipbattle.backend.engine.utils.B2DVars;
 import com.jflusin.starshipbattle.backend.engine.views.scenes.BattleScene;
 import com.jflusin.starshipbattle.backend.game.entities.rendered.info.bars.impl.NexusBlueHPBarEntity;
@@ -24,11 +25,6 @@ public class NexusBlueEntity extends NexusEntity {
 		getTexturedSprite().getSprite().setColor(Color.CYAN);
 		hpBar = new NexusBlueHPBarEntity(scene, this);
 		scene.addRenderedEntity(hpBar);
-	}
-
-	@Override
-	public void handleInput() {
-		
 	}
 
 	@Override
@@ -58,6 +54,16 @@ public class NexusBlueEntity extends NexusEntity {
 	@Override
 	public Team getTeam() {
 		return Team.BLUE;
+	}
+
+	@Override
+	protected float getMinXToWatch() {
+		return 0;
+	}
+
+	@Override
+	protected float getMaxXToWatch() {
+		return Game.V_WIDTH * 25 / 100;
 	}
 	
 }
