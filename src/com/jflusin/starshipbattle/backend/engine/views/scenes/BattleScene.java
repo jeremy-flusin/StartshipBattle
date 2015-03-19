@@ -17,9 +17,9 @@ import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
 import com.jflusin.starshipbattle.backend.game.entities.AbstractRenderedEntity;
 import com.jflusin.starshipbattle.backend.game.entities.AbstractTexturedEntity;
 import com.jflusin.starshipbattle.backend.game.entities.BackgroundEntity;
-import com.jflusin.starshipbattle.backend.game.entities.NexusEntity;
-import com.jflusin.starshipbattle.backend.game.entities.NexusRedEntity;
 import com.jflusin.starshipbattle.backend.game.entities.PlayerEntity;
+import com.jflusin.starshipbattle.backend.game.entities.nexus.NexusEntity;
+import com.jflusin.starshipbattle.backend.game.entities.nexus.NexusRedEntity;
 import com.jflusin.starshipbattle.backend.game.enums.Team;
 
 public class BattleScene extends AbstractScene {

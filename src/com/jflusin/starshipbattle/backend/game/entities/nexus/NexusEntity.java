@@ -1,7 +1,10 @@
-package com.jflusin.starshipbattle.backend.game.entities;
+package com.jflusin.starshipbattle.backend.game.entities.nexus;
 
 import com.badlogic.gdx.math.Vector2;
 import com.jflusin.starshipbattle.backend.engine.views.scenes.BattleScene;
+import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
+import com.jflusin.starshipbattle.backend.game.entities.AbstractTexturedEntity;
+import com.jflusin.starshipbattle.backend.game.entities.NexusShootEntity;
 import com.jflusin.starshipbattle.backend.game.enums.ShootTypes;
 import com.jflusin.starshipbattle.backend.game.interfaces.CanShoot;
 import com.jflusin.starshipbattle.backend.game.interfaces.IsSolid;

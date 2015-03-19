@@ -1,4 +1,4 @@
-package com.jflusin.starshipbattle.backend.game.entities;
+package com.jflusin.starshipbattle.backend.game.entities.nexus;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
@@ -9,6 +9,9 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.jflusin.starshipbattle.backend.engine.utils.B2DVars;
 import com.jflusin.starshipbattle.backend.engine.views.scenes.BattleScene;
+import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
+import com.jflusin.starshipbattle.backend.game.entities.AmmoEntity;
+import com.jflusin.starshipbattle.backend.game.entities.PlayerEntity;
 import com.jflusin.starshipbattle.backend.game.enums.Team;
 
 //FIXME: Dirty hacks because of sprite, should be one class
