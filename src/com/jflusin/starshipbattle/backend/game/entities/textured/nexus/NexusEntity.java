@@ -1,14 +1,14 @@
-package com.jflusin.starshipbattle.backend.game.entities.nexus;
+package com.jflusin.starshipbattle.backend.game.entities.textured.nexus;
 
 import com.badlogic.gdx.math.Vector2;
 import com.jflusin.starshipbattle.backend.engine.views.scenes.BattleScene;
 import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
-import com.jflusin.starshipbattle.backend.game.entities.AbstractTexturedEntity;
-import com.jflusin.starshipbattle.backend.game.entities.NexusShootEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.AbstractTexturedEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.impl.NexusShootEntity;
 import com.jflusin.starshipbattle.backend.game.enums.ShootTypes;
 import com.jflusin.starshipbattle.backend.game.interfaces.CanShoot;
 import com.jflusin.starshipbattle.backend.game.interfaces.IsSolid;
-import com.jflusin.starshipbattle.backend.game.models.NexusModel;
+import com.jflusin.starshipbattle.backend.game.models.impl.NexusModel;
 
 public abstract class NexusEntity extends AbstractTexturedEntity implements IsSolid, CanShoot{
 	

@@ -14,20 +14,20 @@ import com.jflusin.starshipbattle.backend.engine.handlers.inputs.DefaultPlayerTw
 import com.jflusin.starshipbattle.backend.engine.main.Game;
 import com.jflusin.starshipbattle.backend.engine.utils.SceneManager;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
-import com.jflusin.starshipbattle.backend.game.entities.AbstractRenderedEntity;
-import com.jflusin.starshipbattle.backend.game.entities.AbstractTexturedEntity;
-import com.jflusin.starshipbattle.backend.game.entities.BackgroundEntity;
-import com.jflusin.starshipbattle.backend.game.entities.PlayerEntity;
-import com.jflusin.starshipbattle.backend.game.entities.nexus.NexusEntity;
-import com.jflusin.starshipbattle.backend.game.entities.nexus.NexusRedEntity;
+import com.jflusin.starshipbattle.backend.game.entities.rendered.AbstractRenderedEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.AbstractTexturedEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.fixed.impl.BackgroundEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.nexus.NexusEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.nexus.impl.NexusRedEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.player.impl.ShipPlayerEntity;
 import com.jflusin.starshipbattle.backend.game.enums.Team;
 
 public class BattleScene extends AbstractScene {
-	private PlayerEntity playerBlue;
-	private PlayerEntity playerRed;
+	private ShipPlayerEntity playerBlue;
+	private ShipPlayerEntity playerRed;
 	private NexusEntity nexusRed;
 	private BackgroundEntity background;
-	private MultiMap<Team, PlayerEntity> players;
+	private MultiMap<Team, ShipPlayerEntity> players;
 
 	public BattleScene(SceneManager sm) {
 		super(sm);
@@ -37,9 +37,9 @@ public class BattleScene extends AbstractScene {
 	public void loadContent() {
 		background = new BackgroundEntity(this);
 		nexusRed = new NexusRedEntity(this);
-		playerBlue = new PlayerEntity(this, Team.BLUE, new Vector2(300, 500), new DefaultPlayerOneKeyMapping());
-		playerRed = new PlayerEntity(this, Team.RED, new Vector2(1500, 500), new DefaultPlayerTwoKeyMapping());
-		players = new MultiValueMap<Team, PlayerEntity>();
+		playerBlue = new ShipPlayerEntity(this, Team.BLUE, new Vector2(300, 500), new DefaultPlayerOneKeyMapping());
+		playerRed = new ShipPlayerEntity(this, Team.RED, new Vector2(1500, 500), new DefaultPlayerTwoKeyMapping());
+		players = new MultiValueMap<Team, ShipPlayerEntity>();
 		players.put(Team.BLUE, playerBlue);
 		players.put(Team.RED, playerRed);
 		addTexturedEntity(playerBlue);
@@ -82,7 +82,7 @@ public class BattleScene extends AbstractScene {
 
 	@SuppressWarnings("unchecked")
 	// TODO: is this really necessary ?
-	public ArrayList<PlayerEntity> getPlayers(Team team) {
-		return new ArrayList<PlayerEntity>((Collection<PlayerEntity>) players.get(team));
+	public ArrayList<ShipPlayerEntity> getPlayers(Team team) {
+		return new ArrayList<ShipPlayerEntity>((Collection<ShipPlayerEntity>) players.get(team));
 	}
 }

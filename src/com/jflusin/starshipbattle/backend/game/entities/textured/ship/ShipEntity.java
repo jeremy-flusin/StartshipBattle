@@ -1,4 +1,4 @@
-package com.jflusin.starshipbattle.backend.game.entities;
+package com.jflusin.starshipbattle.backend.game.entities.textured.ship;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
@@ -9,10 +9,15 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.jflusin.starshipbattle.backend.engine.handlers.inputs.InputHandler;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
+import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.AbstractTexturedEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.AmmoEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.impl.FireEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.impl.LaserEntity;
 import com.jflusin.starshipbattle.backend.game.enums.ShootTypes;
 import com.jflusin.starshipbattle.backend.game.interfaces.CanShoot;
 import com.jflusin.starshipbattle.backend.game.interfaces.IsSolid;
-import com.jflusin.starshipbattle.backend.game.models.ShipModel;
+import com.jflusin.starshipbattle.backend.game.models.impl.ShipModel;
 import com.jflusin.starshipbattle.backend.game.utils.AngleUtils;
 
 public abstract class ShipEntity extends AbstractTexturedEntity implements IsSolid,

@@ -1,19 +1,23 @@
-package com.jflusin.starshipbattle.backend.game.entities;
+package com.jflusin.starshipbattle.backend.game.entities.textured.player.impl;
 
 import java.util.Random;
 
 import com.badlogic.gdx.math.Vector2;
 import com.jflusin.starshipbattle.backend.engine.main.Game;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
+import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.impl.FireEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.impl.LaserEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.player.AbstractShipPlayerEntity;
 import com.jflusin.starshipbattle.backend.game.enums.Team;
 
-public class DumbIAEntity extends ShipEntity {
+public class DumbShipIAEntity extends AbstractShipPlayerEntity {
 
 	public int time = 0;
 	private AbstractEntity target;
 	private Team team;
 	
-	public DumbIAEntity(AbstractScene scene, AbstractEntity target, Team team) {
+	public DumbShipIAEntity(AbstractScene scene, AbstractEntity target, Team team) {
 		super(scene, new Vector2(Game.V_WIDTH / 2, Game.V_HEIGHT / 2));
 		this.target = target;
 		this.team = team;
@@ -43,10 +47,10 @@ public class DumbIAEntity extends ShipEntity {
 		}
 		
 		if(r.nextBoolean() && r.nextBoolean() && r.nextBoolean()){
-			scene.addTexturedEntity(new LaserEntity(scene, new Vector2(position.x, position.y), target.position , this));
+			scene.addTexturedEntity(new LaserEntity(scene, new Vector2(position.x, position.y), target.getPosition() , this));
 		}
 		if(r.nextBoolean() && r.nextBoolean() && r.nextBoolean()){
-			scene.addTexturedEntity(new FireEntity(scene, new Vector2(position.x, position.y), target.position , this));
+			scene.addTexturedEntity(new FireEntity(scene, new Vector2(position.x, position.y), target.getPosition() , this));
 		}
 	}
 	

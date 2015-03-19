@@ -1,7 +1,8 @@
-package com.jflusin.starshipbattle.backend.game.entities;
+package com.jflusin.starshipbattle.backend.game.entities.textured.ammo.impl;
 
 import com.badlogic.gdx.math.Vector2;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
+import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.AmmoEntity;
 import com.jflusin.starshipbattle.backend.game.interfaces.CanShoot;
 
 public class FireEntity extends AmmoEntity {

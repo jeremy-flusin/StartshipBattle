@@ -1,7 +1,8 @@
-package com.jflusin.starshipbattle.backend.game.entities;
+package com.jflusin.starshipbattle.backend.game.entities.textured;
 
 import com.badlogic.gdx.math.Vector2;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
+import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
 import com.jflusin.starshipbattle.backend.game.sprite.TexturedSprite;
 
 public abstract class AbstractTexturedEntity extends AbstractEntity {

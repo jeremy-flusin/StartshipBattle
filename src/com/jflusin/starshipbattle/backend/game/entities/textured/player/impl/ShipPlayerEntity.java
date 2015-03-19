@@ -1,4 +1,4 @@
-package com.jflusin.starshipbattle.backend.game.entities;
+package com.jflusin.starshipbattle.backend.game.entities.textured.player.impl;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
@@ -7,11 +7,13 @@ import com.jflusin.starshipbattle.backend.engine.handlers.inputs.Actions;
 import com.jflusin.starshipbattle.backend.engine.handlers.inputs.InputHandler;
 import com.jflusin.starshipbattle.backend.engine.handlers.inputs.PlayerKeyMapping;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
+import com.jflusin.starshipbattle.backend.game.entities.rendered.info.bars.impl.HPBarEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.player.AbstractShipPlayerEntity;
 import com.jflusin.starshipbattle.backend.game.enums.ShootTypes;
 import com.jflusin.starshipbattle.backend.game.enums.Team;
 
 
-public class PlayerEntity extends ShipEntity {
+public class ShipPlayerEntity extends AbstractShipPlayerEntity {
 
 	public static float MAX_VELOCITY = 10f;
 	public static float ACCELERATION = 0.8f;
@@ -24,7 +26,7 @@ public class PlayerEntity extends ShipEntity {
 	
 	private HPBarEntity hpBar;
 	
-	public PlayerEntity(AbstractScene scene, Team team,
+	public ShipPlayerEntity(AbstractScene scene, Team team,
 			Vector2 initPosition, PlayerKeyMapping keys) {
 		super(scene, initPosition);
 		this.team = team;

@@ -18,8 +18,8 @@ import com.jflusin.starshipbattle.backend.engine.utils.ContentManager;
 import com.jflusin.starshipbattle.backend.engine.utils.SceneManager;
 import com.jflusin.starshipbattle.backend.engine.utils.UserData;
 import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
-import com.jflusin.starshipbattle.backend.game.entities.AbstractRenderedEntity;
-import com.jflusin.starshipbattle.backend.game.entities.AbstractTexturedEntity;
+import com.jflusin.starshipbattle.backend.game.entities.rendered.AbstractRenderedEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.AbstractTexturedEntity;
 
 public abstract class AbstractScene {
 	protected static int TOTAL_ROOMS = 8;

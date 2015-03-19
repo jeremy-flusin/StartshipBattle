@@ -1,7 +1,8 @@
-package com.jflusin.starshipbattle.backend.game.entities;
+package com.jflusin.starshipbattle.backend.game.entities.rendered.info.bars;
 
 import com.badlogic.gdx.math.Vector2;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
+import com.jflusin.starshipbattle.backend.game.entities.rendered.AbstractRenderedEntity;
 
 
 public abstract class BarEntity extends AbstractRenderedEntity {

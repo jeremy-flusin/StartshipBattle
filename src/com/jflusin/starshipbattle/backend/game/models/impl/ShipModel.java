@@ -1,4 +1,6 @@
-package com.jflusin.starshipbattle.backend.game.models;
+package com.jflusin.starshipbattle.backend.game.models.impl;
+
+import com.jflusin.starshipbattle.backend.game.models.AbstractModel;
 
 public class ShipModel extends AbstractModel {
 
