@@ -11,32 +11,28 @@ import com.jflusin.starshipbattle.backend.game.entities.textured.player.impl.Shi
 import com.jflusin.starshipbattle.backend.game.models.impl.ShipModel;
 
 
-public class HPBarEntity extends BarEntity {
+public class ShieldBarEntity extends BarEntity {
 
 	private ShipPlayerEntity player;
 	private float value = 1f;
 	
-	public HPBarEntity(AbstractScene scene, ShipPlayerEntity player) {
-		super(scene, player.getPosition(), player.getTexturedSprite().getSprite().getWidth(), 6, false);
+	public ShieldBarEntity(AbstractScene scene, ShipPlayerEntity player) {
+		super(scene, player.getPosition(), player.getTexturedSprite().getSprite().getWidth(), 2, false);
 		this.player = player;
 	}
 
 	@Override
 	public void render(ShapeRenderer sr) {
 		sr.begin(ShapeType.Filled);
-        sr.setColor(new Color(0.6f,0,0,1));
-        sr.rect(getX(), getY() + 80, width, height);
-        sr.end();
-		sr.begin(ShapeType.Filled);
-        sr.setColor(new Color(0,0.6f,0,1));
-        sr.rect(getX(), getY() + 80, width * value, height);
+        sr.setColor(Color.CYAN);
+        sr.rect(getX(), getY() + 86, width * value, height);
         sr.end();
 	}
 
 	@Override
 	public void update(float dt) {
 		player.getModel();
-		value = (float)player.getModel().getCurrentLife() / (float)ShipModel.MAX_LIFE;
+		value = (float)player.getModel().getCurrentShieldPower() / (float)ShipModel.SHIELD_MAX_POWER;
 	}
 	
 	@Override

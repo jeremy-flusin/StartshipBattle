@@ -4,10 +4,10 @@ import com.jflusin.starshipbattle.backend.game.models.AbstractModel;
 
 public class ShipModel extends AbstractModel {
 
-	public static int MAX_LIFE = 50;
+	public static int MAX_LIFE = 500;
 	protected int currentLife = MAX_LIFE;
 	
-	protected static int SHIELD_MAX_POWER = 1000;
+	public static int SHIELD_MAX_POWER = 1000;
 	protected int currentShieldPower = SHIELD_MAX_POWER;
 	protected boolean shieldActivated;	
 	
@@ -25,6 +25,9 @@ public class ShipModel extends AbstractModel {
 	}
 
 	public void takeDamage(int damage){
+		if(isProtected()){
+			damage /= 5d;
+		}
 		currentLife -= damage;
 		if(currentLife < 0){
 			currentLife = 0;
@@ -90,5 +93,9 @@ public class ShipModel extends AbstractModel {
 
 	public boolean isAlive() {
 		return currentLife > 0;
+	}
+	
+	public boolean isProtected() {
+		return isShieldActivated() && getCurrentShieldPower() > 0;
 	}
 }

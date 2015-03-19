@@ -18,6 +18,7 @@ import com.jflusin.starshipbattle.backend.game.entities.rendered.AbstractRendere
 import com.jflusin.starshipbattle.backend.game.entities.textured.AbstractTexturedEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.fixed.impl.BackgroundEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.nexus.NexusEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.nexus.impl.NexusBlueEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.nexus.impl.NexusRedEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.player.impl.ShipPlayerEntity;
 import com.jflusin.starshipbattle.backend.game.enums.Team;
@@ -25,6 +26,7 @@ import com.jflusin.starshipbattle.backend.game.enums.Team;
 public class BattleScene extends AbstractScene {
 	private ShipPlayerEntity playerBlue;
 	private ShipPlayerEntity playerRed;
+	private NexusEntity nexusBlue;
 	private NexusEntity nexusRed;
 	private BackgroundEntity background;
 	private MultiMap<Team, ShipPlayerEntity> players;
@@ -36,6 +38,7 @@ public class BattleScene extends AbstractScene {
 	@Override
 	public void loadContent() {
 		background = new BackgroundEntity(this);
+		nexusBlue = new NexusBlueEntity(this);
 		nexusRed = new NexusRedEntity(this);
 		playerBlue = new ShipPlayerEntity(this, Team.BLUE, new Vector2(300, 500), new DefaultPlayerOneKeyMapping());
 		playerRed = new ShipPlayerEntity(this, Team.RED, new Vector2(1500, 500), new DefaultPlayerTwoKeyMapping());
@@ -44,6 +47,7 @@ public class BattleScene extends AbstractScene {
 		players.put(Team.RED, playerRed);
 		addTexturedEntity(playerBlue);
 		addTexturedEntity(playerRed);
+		addTexturedEntity(nexusBlue);
 		addTexturedEntity(nexusRed);
 	}
 
@@ -51,6 +55,7 @@ public class BattleScene extends AbstractScene {
 	public void handleInput() {
 		playerBlue.handleInput();
 		playerRed.handleInput();
+		nexusBlue.handleInput();
 		nexusRed.handleInput();
 	}
 
