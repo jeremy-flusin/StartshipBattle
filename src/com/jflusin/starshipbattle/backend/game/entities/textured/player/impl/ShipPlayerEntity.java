@@ -10,6 +10,7 @@ import com.jflusin.starshipbattle.backend.engine.main.Game;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
 import com.jflusin.starshipbattle.backend.game.entities.rendered.info.bars.impl.HPBarEntity;
 import com.jflusin.starshipbattle.backend.game.entities.rendered.info.bars.impl.ShieldBarEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.asteroid.AsteroidEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.player.AbstractShipPlayerEntity;
 import com.jflusin.starshipbattle.backend.game.enums.ShootTypes;
 import com.jflusin.starshipbattle.backend.game.enums.Team;
@@ -42,6 +43,10 @@ public class ShipPlayerEntity extends AbstractShipPlayerEntity {
 
 	@Override
 	public void handleInput() {
+		
+		if(InputHandler.isPressed(Input.Keys.J)){
+			getScene().addTexturedEntity(new AsteroidEntity(getScene()));
+		}
 		
 		//Dirty
 		if(InputHandler.isDown(Input.Keys.ESCAPE)){

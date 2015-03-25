@@ -70,10 +70,7 @@ public abstract class ShipEntity extends AbstractTexturedEntity implements IsSol
 
 	@Override
 	public void onContact(AbstractEntity other) {
-		if (other instanceof IsSolid) {
-			this.acceleration.x = -this.acceleration.x;
-			this.acceleration.y = -this.acceleration.y;
-		} else if (other instanceof AmmoEntity) {
+		if (other instanceof AmmoEntity) {
 			AmmoEntity ammo = (AmmoEntity) other;
 			if (!ammo.getShooter().getTeam().equals(getTeam())) {
 				getModel().takeDamage(ammo.getCurrentPower());
