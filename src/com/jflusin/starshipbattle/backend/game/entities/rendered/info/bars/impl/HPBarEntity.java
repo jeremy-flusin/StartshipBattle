@@ -35,7 +35,6 @@ public class HPBarEntity extends BarEntity {
 
 	@Override
 	public void update(float dt) {
-		player.getModel();
 		value = (float)player.getModel().getCurrentLife() / (float)ShipModel.MAX_LIFE;
 	}
 	

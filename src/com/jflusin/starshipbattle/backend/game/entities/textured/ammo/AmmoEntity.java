@@ -10,6 +10,7 @@ import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
 import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.AbstractTexturedEntity;
 import com.jflusin.starshipbattle.backend.game.interfaces.CanShoot;
+import com.jflusin.starshipbattle.backend.game.interfaces.IsSolid;
 import com.jflusin.starshipbattle.backend.game.utils.AngleUtils;
 
 public class AmmoEntity extends AbstractTexturedEntity {
@@ -70,8 +71,10 @@ public class AmmoEntity extends AbstractTexturedEntity {
 
 	@Override
 	public void onContact(AbstractEntity other) {
-		if(!shooter.equals(other) && !(other instanceof AmmoEntity)){
-			destroy();
+		if(other instanceof IsSolid){
+			if(!shooter.equals(other) && !(other instanceof AmmoEntity)){
+				destroy();
+			}
 		}
 	}
 

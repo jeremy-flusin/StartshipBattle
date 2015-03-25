@@ -1,5 +1,8 @@
 package com.jflusin.starshipbattle.backend.game.entities.textured.player.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
@@ -8,10 +11,16 @@ import com.jflusin.starshipbattle.backend.engine.handlers.inputs.InputHandler;
 import com.jflusin.starshipbattle.backend.engine.handlers.inputs.PlayerKeyMapping;
 import com.jflusin.starshipbattle.backend.engine.main.Game;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
+import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
 import com.jflusin.starshipbattle.backend.game.entities.rendered.info.bars.impl.HPBarEntity;
 import com.jflusin.starshipbattle.backend.game.entities.rendered.info.bars.impl.ShieldBarEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.asteroid.AsteroidEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.BonusEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.impl.LaserBonusEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.ui.BonusUIEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.ui.impl.LaserBonusUIEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.player.AbstractShipPlayerEntity;
+import com.jflusin.starshipbattle.backend.game.enums.BonusType;
 import com.jflusin.starshipbattle.backend.game.enums.ShootTypes;
 import com.jflusin.starshipbattle.backend.game.enums.Team;
 
@@ -22,6 +31,8 @@ public class ShipPlayerEntity extends AbstractShipPlayerEntity {
 	public static float ACCELERATION = 0.8f;
 	public static float DECELERATION = 0.5f;
 	public static float TURBO = 2f;
+
+	private Map<BonusType, BonusUIEntity> bonus;
 	
 	private Team team;
 	
@@ -39,10 +50,18 @@ public class ShipPlayerEntity extends AbstractShipPlayerEntity {
 		scene.addRenderedEntity(hpBar);
 		shieldBar = new ShieldBarEntity(scene, this);
 		scene.addRenderedEntity(shieldBar);
+		bonus = new HashMap<BonusType, BonusUIEntity>();
+		LaserBonusUIEntity laserBonusEntity = new LaserBonusUIEntity(scene, this);
+		scene.addTexturedEntity(laserBonusEntity);
+		bonus.put(BonusType.LASER, laserBonusEntity);
 	}
 
 	@Override
 	public void handleInput() {
+		
+		if(InputHandler.isDown(Input.Keys.K)){
+			getScene().addTexturedEntity(new LaserBonusEntity(getScene()));
+		}
 		
 		if(InputHandler.isPressed(Input.Keys.J)){
 			getScene().addTexturedEntity(new AsteroidEntity(getScene()));
@@ -130,6 +149,12 @@ public class ShipPlayerEntity extends AbstractShipPlayerEntity {
 		if(InputHandler.isClicked(Input.Buttons.RIGHT)){
 			shoot(ShootTypes.SECONDARY, new Vector2(InputHandler.mouseX, InputHandler.mouseY));
 		};
+		if(InputHandler.isClicked(Input.Buttons.MIDDLE)){
+			if(bonus.get(BonusType.LASER).isVisible()){
+				shoot(ShootTypes.SECONDARY, new Vector2(InputHandler.mouseX, InputHandler.mouseY));
+				bonus.get(BonusType.LASER).setVisible(false);
+			}
+		};
 	}
 	
 	@Override
@@ -140,6 +165,7 @@ public class ShipPlayerEntity extends AbstractShipPlayerEntity {
 		}else if (Team.RED.equals(team)){
 			getTexturedSprite().getSprite().setColor(Color.RED);
 		}
+		bonus.get(BonusType.LASER).update(dt);
 	}
 	
 	@Override
@@ -147,10 +173,29 @@ public class ShipPlayerEntity extends AbstractShipPlayerEntity {
 		super.destroy();
 		hpBar.destroy();
 		shieldBar.destroy();
+		bonus.get(BonusType.LASER).destroy();
+	}
+	
+	@Override
+	public void onContact(AbstractEntity other) {
+		super.onContact(other);
+		if(other instanceof BonusEntity){
+			BonusEntity bonus = (BonusEntity) other;
+			pickBonus(bonus.getType());
+		}
 	}
 	
 	@Override
 	public Team getTeam() {
 		return team;
 	}
+	
+	public void pickBonus(BonusType bonusType){
+		bonus.get(bonusType).setVisible(true);
+	}
+	
+	public void useBonus(BonusType bonusType){
+		bonus.get(bonusType).setVisible(false);
+	}
+	
 }

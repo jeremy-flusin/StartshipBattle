@@ -9,6 +9,8 @@ public abstract class AbstractTexturedEntity extends AbstractEntity {
 
 	private TexturedSprite texturedSprite;
 	
+	private boolean isVisible = true;
+	
 	public AbstractTexturedEntity(AbstractScene scene, String texturePath, Vector2 initPosition, float width, float height,
 			boolean collidable) {
 		super(scene, initPosition, width, height, collidable);
@@ -24,5 +26,13 @@ public abstract class AbstractTexturedEntity extends AbstractEntity {
 	
 	public TexturedSprite getTexturedSprite() {
 		return texturedSprite;
+	}
+	
+	public void setVisible(boolean isVisible) {
+		this.isVisible = isVisible;
+	}
+	
+	public boolean isVisible() {
+		return isVisible;
 	}
 }

@@ -7,7 +7,7 @@ import com.jflusin.starshipbattle.backend.engine.main.Game;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
 import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.impl.FireEntity;
-import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.impl.LaserEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.impl.EnergyEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.player.AbstractShipPlayerEntity;
 import com.jflusin.starshipbattle.backend.game.enums.Team;
 
@@ -47,7 +47,7 @@ public class DumbShipIAEntity extends AbstractShipPlayerEntity {
 		}
 		
 		if(r.nextBoolean() && r.nextBoolean() && r.nextBoolean()){
-			scene.addTexturedEntity(new LaserEntity(scene, new Vector2(position.x, position.y), target.getPosition() , this));
+			scene.addTexturedEntity(new EnergyEntity(scene, new Vector2(position.x, position.y), target.getPosition() , this));
 		}
 		if(r.nextBoolean() && r.nextBoolean() && r.nextBoolean()){
 			scene.addTexturedEntity(new FireEntity(scene, new Vector2(position.x, position.y), target.getPosition() , this));

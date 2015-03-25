@@ -77,7 +77,9 @@ public class BattleScene extends AbstractScene {
 		sr.setProjectionMatrix(cam.combined);
 		sb.begin();
 		for (AbstractTexturedEntity entity : texturedEntities) {
-			entity.getTexturedSprite().getSprite().draw(sb);
+			if(entity.isVisible()){
+				entity.getTexturedSprite().getSprite().draw(sb);
+			}
 		}
 		sb.end();
 		sb.setProjectionMatrix(cam.combined);

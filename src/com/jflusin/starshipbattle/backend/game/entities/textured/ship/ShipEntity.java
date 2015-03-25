@@ -13,7 +13,8 @@ import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.AbstractTexturedEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.AmmoEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.impl.FireEntity;
-import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.impl.LaserEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.impl.EnergyEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.asteroid.AsteroidEntity;
 import com.jflusin.starshipbattle.backend.game.enums.ShootTypes;
 import com.jflusin.starshipbattle.backend.game.interfaces.CanShoot;
 import com.jflusin.starshipbattle.backend.game.interfaces.IsSolid;
@@ -79,6 +80,11 @@ public abstract class ShipEntity extends AbstractTexturedEntity implements IsSol
 				}
 			}
 		}
+		if(other instanceof AsteroidEntity){
+			this.acceleration.x = 0;
+			this.acceleration.y = 0;
+			getModel().takeDamage(10);
+		}
 	}
 
 	public ShipModel getModel() {
@@ -88,7 +94,7 @@ public abstract class ShipEntity extends AbstractTexturedEntity implements IsSol
 	@Override
 	public void shoot(ShootTypes type, Vector2 target) {
 		if (ShootTypes.PRIMARY.equals(type)) {
-			scene.addTexturedEntity(new LaserEntity(scene, new Vector2(this.position.x,
+			scene.addTexturedEntity(new EnergyEntity(scene, new Vector2(this.position.x,
 					this.position.y), target, this));
 		} else if (ShootTypes.SECONDARY.equals(type)) {
 			scene.addTexturedEntity(new FireEntity(scene, new Vector2(this.position.x,

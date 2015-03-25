@@ -13,7 +13,7 @@ public class NexusShootEntity extends AmmoEntity {
 	private ShipPlayerEntity targetToFollow;
 	
 	public NexusShootEntity(AbstractScene scene, Vector2 position, AbstractEntity target, CanShoot shooter) {
-		super(scene, "res/laser.png", 60, 60, position, target.getPosition(), shooter);
+		super(scene, "res/energy.png", 60, 60, position, target.getPosition(), shooter);
 		targetToFollow = (ShipPlayerEntity)target;
 	}
 
