@@ -81,13 +81,15 @@ public class BattleScene extends AbstractScene {
 		sb.end();
 		sr.setProjectionMatrix(cam.combined);
 		sb.begin();
+<<<<<<< HEAD
 		for (AbstractTexturedEntity entity : texturedEntities) {
 			if(entity.isVisible()){
 				entity.getTexturedSprite().getSprite().draw(sb);
 			}
-		}
+=======
 		for (AbstractRenderedEntity entity : renderedEntities) {
 			entity.render(sr);
+>>>>>>> ajout du timewatcher
 		}
 		sb.end();
 		sb.setProjectionMatrix(cam.combined);

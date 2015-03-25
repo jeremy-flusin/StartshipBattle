@@ -9,10 +9,6 @@ import com.jflusin.starshipbattle.backend.game.enums.Team;
 
 public class BattleSceneWatcher {
 	
-	private int frames;
-	private int seconds;
-	private int minutes;
-	
 	private SceneManager sm;
 	private BattleScene scene;
 	
@@ -22,8 +18,6 @@ public class BattleSceneWatcher {
 	}
 	
 	public void watch() {
-		
-		handleTime();
 		
 		//Nexus vulnerability
 		boolean blueNexusVulnerable = true;
@@ -51,13 +45,6 @@ public class BattleSceneWatcher {
 		}
 	}
 	
-	private void handleTime() {
-		frames++;
-		seconds = frames / 60;
-		minutes = seconds / 60;
-		System.out.println("Time elapsed: " + minutes + "min " + seconds + "sec");
-	}
-
 	private void endGame(Team winningTeam) {
 		SceneData sd = new SceneData();
 		sd.putData("winningTeam", winningTeam);

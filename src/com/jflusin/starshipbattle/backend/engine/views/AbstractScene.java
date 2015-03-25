@@ -16,6 +16,7 @@ import com.jflusin.starshipbattle.backend.engine.handlers.contact.ContactHandler
 import com.jflusin.starshipbattle.backend.engine.main.Game;
 import com.jflusin.starshipbattle.backend.engine.utils.ContentManager;
 import com.jflusin.starshipbattle.backend.engine.utils.SceneManager;
+import com.jflusin.starshipbattle.backend.engine.utils.TimeWatcher;
 import com.jflusin.starshipbattle.backend.engine.utils.UserData;
 import com.jflusin.starshipbattle.backend.engine.views.scenes.SceneData;
 import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
@@ -39,6 +40,7 @@ public abstract class AbstractScene {
 	protected ArrayList<AbstractEntity> entities;
 	protected AbstractEntity player;
 	protected SceneData sd;
+	protected TimeWatcher tw;
 	
 	public AbstractScene(SceneManager sm, SceneData sd) {
 		this.sm = sm;
@@ -48,6 +50,7 @@ public abstract class AbstractScene {
 		sr = game.getShapeRenderer();
 		cam = game.getCamera();
 		cm = new ContentManager();
+		tw = new TimeWatcher();
 		if (Game.IS_DEBUG) {
 			b2dr = new Box2DDebugRenderer();
 		}
