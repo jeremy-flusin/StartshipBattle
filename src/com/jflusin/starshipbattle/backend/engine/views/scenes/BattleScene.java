@@ -34,7 +34,7 @@ public class BattleScene extends AbstractScene {
 	private MultiMap<Team, ShipPlayerEntity> players;
 	private BattleSceneWatcher bsw;
 	private BitmapFont font;
-	
+
 	public BattleScene(SceneManager sm, SceneData sd) {
 		super(sm, sd);
 	}
@@ -75,19 +75,16 @@ public class BattleScene extends AbstractScene {
 		Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		sb.begin();
 		background.getTexturedSprite().getSprite().draw(sb);
-		for (AbstractTexturedEntity entity : texturedEntities) {
-			entity.getTexturedSprite().getSprite().draw(sb);
-		}
 		sb.end();
+		for (AbstractRenderedEntity entity : renderedEntities) {
+			entity.render(sr);
+		}
 		sr.setProjectionMatrix(cam.combined);
 		sb.begin();
 		for (AbstractTexturedEntity entity : texturedEntities) {
-			if(entity.isVisible()){
+			if (entity.isVisible()) {
 				entity.getTexturedSprite().getSprite().draw(sb);
 			}
-		}
-		for (AbstractRenderedEntity entity : renderedEntities) {
-			entity.render(sr);
 		}
 		sb.end();
 		sb.setProjectionMatrix(cam.combined);
@@ -105,7 +102,7 @@ public class BattleScene extends AbstractScene {
 		bsw.watch();
 		tw.watch();
 	}
-	
+
 	@Override
 	public void dispose() {
 	}
@@ -115,11 +112,11 @@ public class BattleScene extends AbstractScene {
 	public ArrayList<ShipPlayerEntity> getPlayers(Team team) {
 		return new ArrayList<ShipPlayerEntity>((Collection<ShipPlayerEntity>) players.get(team));
 	}
-	
+
 	public NexusEntity getNexusBlue() {
 		return nexusBlue;
 	}
-	
+
 	public NexusEntity getNexusRed() {
 		return nexusRed;
 	}

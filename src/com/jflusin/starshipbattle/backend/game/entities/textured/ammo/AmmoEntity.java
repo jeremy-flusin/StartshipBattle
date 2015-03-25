@@ -9,7 +9,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
 import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.AbstractTexturedEntity;
-import com.jflusin.starshipbattle.backend.game.interfaces.CanShoot;
+import com.jflusin.starshipbattle.backend.game.interfaces.Fighter;
 import com.jflusin.starshipbattle.backend.game.interfaces.IsSolid;
 import com.jflusin.starshipbattle.backend.game.utils.AngleUtils;
 
@@ -20,9 +20,9 @@ public class AmmoEntity extends AbstractTexturedEntity {
 	
 	protected static float VELOCITY = 5f;
 
-	private CanShoot shooter;
+	private Fighter shooter;
 	
-	public AmmoEntity(AbstractScene scene, String texturePath, float width, float height, Vector2 position, Vector2 target, CanShoot shooter) {
+	public AmmoEntity(AbstractScene scene, String texturePath, float width, float height, Vector2 position, Vector2 target, Fighter shooter) {
 		super(scene, texturePath, position, width, height, true);
 		setAngle(AngleUtils.getRadAngle(position, target));
 		setX(position.x);
@@ -78,7 +78,7 @@ public class AmmoEntity extends AbstractTexturedEntity {
 		}
 	}
 
-	public CanShoot getShooter() {
+	public Fighter getShooter() {
 		return shooter;
 	}
 	

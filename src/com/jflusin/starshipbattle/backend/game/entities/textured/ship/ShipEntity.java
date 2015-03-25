@@ -12,17 +12,18 @@ import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
 import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.AbstractTexturedEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.AmmoEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.LaserEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.impl.FireEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.impl.EnergyEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.asteroid.AsteroidEntity;
 import com.jflusin.starshipbattle.backend.game.enums.ShootTypes;
-import com.jflusin.starshipbattle.backend.game.interfaces.CanShoot;
+import com.jflusin.starshipbattle.backend.game.interfaces.Fighter;
 import com.jflusin.starshipbattle.backend.game.interfaces.IsSolid;
 import com.jflusin.starshipbattle.backend.game.models.impl.ShipModel;
 import com.jflusin.starshipbattle.backend.game.utils.AngleUtils;
 
 public abstract class ShipEntity extends AbstractTexturedEntity implements IsSolid,
-		CanShoot {
+		Fighter {
 
 	public static float WIDTH = 80;
 	public static float HEIGHT = 67;
@@ -99,6 +100,9 @@ public abstract class ShipEntity extends AbstractTexturedEntity implements IsSol
 		} else if (ShootTypes.SECONDARY.equals(type)) {
 			scene.addTexturedEntity(new FireEntity(scene, new Vector2(this.position.x,
 					this.position.y), target, this));
+		} else if (ShootTypes.UNIQUE.equals(type)) {
+			scene.addTexturedEntity(new LaserEntity(scene, new Vector2(this.position.x,
+					this.position.y), this));
 		}
 	}
 	

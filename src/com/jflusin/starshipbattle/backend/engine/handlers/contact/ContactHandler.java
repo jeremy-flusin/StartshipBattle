@@ -40,7 +40,24 @@ public class ContactHandler implements ContactListener {
 
 	@Override
 	public void endContact(Contact contact) {
-
+		boolean entitiesRegistred = false;
+		AbstractEntity entityA = null;
+		AbstractEntity entityB = null;
+		for (AbstractEntity entity : registeredEntities) {
+			if(contact.getFixtureA().getBody().equals(entity.getBody())){
+				entityA = entity;
+				for (AbstractEntity entityBis  : registeredEntities){
+					if (contact.getFixtureB().getBody().equals(entityBis.getBody())){
+						entityB = entityBis;
+						entitiesRegistred = true;
+					}
+				}
+			}
+		}
+		if(entitiesRegistred){
+			entityA.endContact(entityB);
+			entityB.endContact(entityA);
+		}
 	}
 
 	@Override

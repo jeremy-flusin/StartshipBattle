@@ -5,14 +5,14 @@ import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
 import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.AmmoEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.player.impl.ShipPlayerEntity;
-import com.jflusin.starshipbattle.backend.game.interfaces.CanShoot;
+import com.jflusin.starshipbattle.backend.game.interfaces.Fighter;
 import com.jflusin.starshipbattle.backend.game.utils.AngleUtils;
 
 public class NexusShootEntity extends AmmoEntity {
 
 	private ShipPlayerEntity targetToFollow;
 	
-	public NexusShootEntity(AbstractScene scene, Vector2 position, AbstractEntity target, CanShoot shooter) {
+	public NexusShootEntity(AbstractScene scene, Vector2 position, AbstractEntity target, Fighter shooter) {
 		super(scene, "res/energy.png", 60, 60, position, target.getPosition(), shooter);
 		targetToFollow = (ShipPlayerEntity)target;
 	}

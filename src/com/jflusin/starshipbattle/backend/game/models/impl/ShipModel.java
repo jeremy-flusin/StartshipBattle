@@ -1,8 +1,9 @@
 package com.jflusin.starshipbattle.backend.game.models.impl;
 
+import com.jflusin.starshipbattle.backend.game.interfaces.FighterModel;
 import com.jflusin.starshipbattle.backend.game.models.AbstractModel;
 
-public class ShipModel extends AbstractModel {
+public class ShipModel extends AbstractModel implements FighterModel {
 
 	public static int MAX_LIFE = 500;
 	protected int currentLife = MAX_LIFE;
@@ -24,6 +25,7 @@ public class ShipModel extends AbstractModel {
 		return currentLife;
 	}
 
+	@Override
 	public void takeDamage(int damage){
 		if(isProtected()){
 			damage /= 5d;

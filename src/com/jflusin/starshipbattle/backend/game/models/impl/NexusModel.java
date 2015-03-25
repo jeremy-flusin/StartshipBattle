@@ -1,8 +1,9 @@
 package com.jflusin.starshipbattle.backend.game.models.impl;
 
+import com.jflusin.starshipbattle.backend.game.interfaces.FighterModel;
 import com.jflusin.starshipbattle.backend.game.models.AbstractModel;
 
-public class NexusModel extends AbstractModel{
+public class NexusModel extends AbstractModel implements FighterModel{
 
 	public static int MAX_HP = 20000;
 	protected int currentHP = MAX_HP;
@@ -28,6 +29,7 @@ public class NexusModel extends AbstractModel{
 		this.shootCooldown = shootCooldown;
 	}
 	
+	@Override
 	public void takeDamage(int damage){
 		if(isVulnerable){
 			currentHP -= damage;
@@ -41,6 +43,11 @@ public class NexusModel extends AbstractModel{
 		return currentHP;
 	}
 
+	@Override
+	public boolean isAlive() {
+		return currentHP > 0;
+	}
+	
 	public void setVulnerable(boolean nexusVulnerable) {
 		this.isVulnerable = nexusVulnerable;
 	}

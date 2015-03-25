@@ -151,10 +151,12 @@ public class ShipPlayerEntity extends AbstractShipPlayerEntity {
 		};
 		if(InputHandler.isClicked(Input.Buttons.MIDDLE)){
 			if(bonus.get(BonusType.LASER).isVisible()){
-				shoot(ShootTypes.SECONDARY, new Vector2(InputHandler.mouseX, InputHandler.mouseY));
+				shoot(ShootTypes.UNIQUE, new Vector2(InputHandler.mouseX, InputHandler.mouseY));
 				bonus.get(BonusType.LASER).setVisible(false);
 			}
 		};
+		
+		bonus.get(BonusType.LASER).handleInput();
 	}
 	
 	@Override

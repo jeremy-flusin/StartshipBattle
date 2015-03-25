@@ -107,11 +107,11 @@ public abstract class AbstractEntity {
 
 	public void update(float dt) {
 		body.setTransform(new Vector2((position.x + width / 2) / B2DVars.PPM, (position.y + height / 2) / B2DVars.PPM),
-				angle);
+				0);
 	};
 
 	public void destroy() {
-		if(body != null){
+		if (body != null) {
 			body.setUserData(UserData.TO_DESTROY);
 		}
 		userData = UserData.TO_DESTROY;
@@ -122,4 +122,8 @@ public abstract class AbstractEntity {
 	public abstract Body createBody();
 
 	public abstract void onContact(AbstractEntity other);
+	
+	public void endContact(AbstractEntity other){
+		
+	};
 }

@@ -9,12 +9,12 @@ import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.AmmoEntity
 import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.impl.NexusShootEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.player.impl.ShipPlayerEntity;
 import com.jflusin.starshipbattle.backend.game.enums.ShootTypes;
-import com.jflusin.starshipbattle.backend.game.interfaces.CanShoot;
+import com.jflusin.starshipbattle.backend.game.interfaces.Fighter;
 import com.jflusin.starshipbattle.backend.game.interfaces.IsSolid;
 import com.jflusin.starshipbattle.backend.game.models.impl.NexusModel;
 import com.jflusin.starshipbattle.backend.game.utils.TeamUtils;
 
-public abstract class NexusEntity extends AbstractTexturedEntity implements IsSolid, CanShoot{
+public abstract class NexusEntity extends AbstractTexturedEntity implements IsSolid, Fighter{
 	
 	protected NexusHPBarEntity hpBar;
 	
@@ -28,7 +28,7 @@ public abstract class NexusEntity extends AbstractTexturedEntity implements IsSo
 	public void onContact(AbstractEntity other) {
 		if (other instanceof AmmoEntity) {
 			AmmoEntity ammo = (AmmoEntity) other;
-			CanShoot shooter = (CanShoot) ammo.getShooter();
+			Fighter shooter = (Fighter) ammo.getShooter();
 			if (!getTeam().equals(shooter.getTeam())) {
 				getModel().takeDamage(ammo.getCurrentPower());
 				if(getModel().getCurrentHP() <= 0){
