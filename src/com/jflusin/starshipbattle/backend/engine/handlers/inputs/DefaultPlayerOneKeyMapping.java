@@ -15,6 +15,7 @@ public class DefaultPlayerOneKeyMapping extends PlayerKeyMapping {
 		map.put(Actions.SHOOT_SECONDARY, Buttons.RIGHT);
 		map.put(Actions.SHIELD, Keys.E);
 		map.put(Actions.TURBO, Keys.SPACE);
+		map.put(Actions.PROTECT, Keys.A);
 	}
 	
 }

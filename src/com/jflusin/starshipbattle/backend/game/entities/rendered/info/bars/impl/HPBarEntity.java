@@ -8,16 +8,16 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
 import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
 import com.jflusin.starshipbattle.backend.game.entities.rendered.info.bars.BarEntity;
-import com.jflusin.starshipbattle.backend.game.entities.textured.player.impl.ShipPlayerEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.player.impl.PlayerEntity;
 import com.jflusin.starshipbattle.backend.game.models.impl.ShipModel;
 
 
 public class HPBarEntity extends BarEntity {
 
-	private ShipPlayerEntity player;
+	private PlayerEntity player;
 	private float value = 1f;
 	
-	public HPBarEntity(AbstractScene scene, ShipPlayerEntity player) {
+	public HPBarEntity(AbstractScene scene, PlayerEntity player) {
 		super(scene, player.getPosition(), player.getTexturedSprite().getSprite().getWidth(), 6, false);
 		this.player = player;
 	}

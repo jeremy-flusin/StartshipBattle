@@ -17,6 +17,10 @@ public class ShipModel extends AbstractModel implements FighterModel {
 	protected boolean turboActivated;
 	protected float turboCoeff = 2f;
 	
+	protected boolean invicible = false;
+	protected static int INVICIBLE_MAX_DURATION = 1000;
+	protected int currentInvincibleDuration = 0;
+	
 	public ShipModel() {
 
 	}
@@ -27,12 +31,14 @@ public class ShipModel extends AbstractModel implements FighterModel {
 
 	@Override
 	public void takeDamage(int damage){
-		if(isProtected()){
-			damage /= 5d;
-		}
-		currentLife -= damage;
-		if(currentLife < 0){
-			currentLife = 0;
+		if(!isInvicible()){
+			if(isProtected()){
+				damage /= 5d;
+			}
+			currentLife -= damage;
+			if(currentLife < 0){
+				currentLife = 0;
+			}
 		}
 	}
 
@@ -110,5 +116,26 @@ public class ShipModel extends AbstractModel implements FighterModel {
 
 	public void revive() {
 		currentLife = MAX_LIFE;
+	}
+	
+	public void setInvicible(boolean invicible) {
+		this.invicible = invicible;
+		if(invicible){
+			currentInvincibleDuration = INVICIBLE_MAX_DURATION;
+		}
+	}
+	
+	public boolean isInvicible() {
+		return invicible && currentInvincibleDuration > 0;
+	}
+
+	public void updateProtection() {
+		System.out.println(currentInvincibleDuration);
+		if(invicible){
+			currentInvincibleDuration --;
+			if(currentInvincibleDuration < 0){
+				currentInvincibleDuration = 0;
+			}
+		}
 	}
 }

@@ -3,7 +3,7 @@ package com.jflusin.starshipbattle.backend.engine.views.scenes;
 import java.util.ArrayList;
 
 import com.jflusin.starshipbattle.backend.engine.utils.SceneManager;
-import com.jflusin.starshipbattle.backend.game.entities.textured.player.impl.ShipPlayerEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.player.impl.PlayerEntity;
 import com.jflusin.starshipbattle.backend.game.enums.Team;
 
 
@@ -21,16 +21,16 @@ public class BattleSceneWatcher {
 		
 		//Nexus vulnerability
 		boolean blueNexusVulnerable = true;
-		ArrayList<ShipPlayerEntity> bluePlayers = scene.getPlayers(Team.BLUE);
-		for (ShipPlayerEntity bluePlayer : bluePlayers) {
+		ArrayList<PlayerEntity> bluePlayers = scene.getPlayers(Team.BLUE);
+		for (PlayerEntity bluePlayer : bluePlayers) {
 			if(bluePlayer.getModel().isAlive()){
 				blueNexusVulnerable = false;
 			}
 		}
 		scene.getNexusBlue().getModel().setVulnerable(blueNexusVulnerable);
 		boolean redNexusVulnerable = true;
-		ArrayList<ShipPlayerEntity> redPlayers = scene.getPlayers(Team.RED);
-		for (ShipPlayerEntity redPlayer : redPlayers) {
+		ArrayList<PlayerEntity> redPlayers = scene.getPlayers(Team.RED);
+		for (PlayerEntity redPlayer : redPlayers) {
 			if(redPlayer.getModel().isAlive()){
 				redNexusVulnerable = false;
 			}

@@ -26,18 +26,18 @@ import com.jflusin.starshipbattle.backend.game.entities.textured.fixed.impl.Back
 import com.jflusin.starshipbattle.backend.game.entities.textured.nexus.NexusEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.nexus.impl.NexusBlueEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.nexus.impl.NexusRedEntity;
-import com.jflusin.starshipbattle.backend.game.entities.textured.player.impl.ShipPlayerEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.player.impl.PlayerEntity;
 import com.jflusin.starshipbattle.backend.game.enums.BonusType;
 import com.jflusin.starshipbattle.backend.game.enums.Team;
 
 public class BattleScene extends AbstractScene {
-	private ShipPlayerEntity playerBlue;
-	private ShipPlayerEntity playerBlue2;
-	private ShipPlayerEntity playerRed;
+	private PlayerEntity playerBlue;
+	private PlayerEntity playerBlue2;
+	private PlayerEntity playerRed;
 	private NexusEntity nexusBlue;
 	private NexusEntity nexusRed;
 	private BackgroundEntity background;
-	private MultiMap<Team, ShipPlayerEntity> players;
+	private MultiMap<Team, PlayerEntity> players;
 	private BattleSceneWatcher bsw;
 	private BitmapFont font;
 	private EventsHandler eventHandler;
@@ -51,10 +51,10 @@ public class BattleScene extends AbstractScene {
 		background = new BackgroundEntity(this);
 		nexusBlue = new NexusBlueEntity(this);
 		nexusRed = new NexusRedEntity(this);
-		playerBlue = new ShipPlayerEntity(this, Team.BLUE, new Vector2(300, 500), new DefaultPlayerOneKeyMapping());
-		playerBlue2 = new ShipPlayerEntity(this, Team.BLUE, new Vector2(250, 300), new DefaultPlayerOneKeyMapping());
-		playerRed = new ShipPlayerEntity(this, Team.RED, new Vector2(1500, 500), new DefaultPlayerTwoKeyMapping());
-		players = new MultiValueMap<Team, ShipPlayerEntity>();
+		playerBlue = new PlayerEntity(this, Team.BLUE, new Vector2(300, 500), new DefaultPlayerOneKeyMapping());
+		playerBlue2 = new PlayerEntity(this, Team.BLUE, new Vector2(250, 300), new DefaultPlayerOneKeyMapping());
+		playerRed = new PlayerEntity(this, Team.RED, new Vector2(1500, 500), new DefaultPlayerTwoKeyMapping());
+		players = new MultiValueMap<Team, PlayerEntity>();
 		players.put(Team.BLUE, playerBlue);
 		players.put(Team.BLUE, playerBlue2);
 		players.put(Team.RED, playerRed);
@@ -124,8 +124,8 @@ public class BattleScene extends AbstractScene {
 
 	@SuppressWarnings("unchecked")
 	// TODO: is this really necessary ?
-	public ArrayList<ShipPlayerEntity> getPlayers(Team team) {
-		return new ArrayList<ShipPlayerEntity>((Collection<ShipPlayerEntity>) players.get(team));
+	public ArrayList<PlayerEntity> getPlayers(Team team) {
+		return new ArrayList<PlayerEntity>((Collection<PlayerEntity>) players.get(team));
 	}
 
 	public NexusEntity getNexusBlue() {
@@ -152,7 +152,7 @@ public class BattleScene extends AbstractScene {
 
 	public void eventRevivePlayers() {
 		for (Object player : players.values()) {
-			ShipPlayerEntity playerEntity = (ShipPlayerEntity)player;
+			PlayerEntity playerEntity = (PlayerEntity)player;
 			playerEntity.getModel().revive();
 		}
 	}

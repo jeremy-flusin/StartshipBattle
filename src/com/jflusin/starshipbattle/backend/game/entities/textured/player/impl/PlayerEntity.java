@@ -18,15 +18,17 @@ import com.jflusin.starshipbattle.backend.game.entities.textured.asteroid.Astero
 import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.BonusEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.impl.LaserBonusEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.impl.NexusHealBonusEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.impl.TeamShieldBonusEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.ui.BonusUIEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.ui.impl.LaserBonusUIEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.ui.impl.TeamShieldBonusUIEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.player.AbstractShipPlayerEntity;
 import com.jflusin.starshipbattle.backend.game.enums.BonusType;
 import com.jflusin.starshipbattle.backend.game.enums.ShootTypes;
 import com.jflusin.starshipbattle.backend.game.enums.Team;
 
 
-public class ShipPlayerEntity extends AbstractShipPlayerEntity {
+public class PlayerEntity extends AbstractShipPlayerEntity {
 
 	public static float MAX_VELOCITY = 10f;
 	public static float ACCELERATION = 0.8f;
@@ -41,8 +43,8 @@ public class ShipPlayerEntity extends AbstractShipPlayerEntity {
 
 	private HPBarEntity hpBar;
 	private ShieldBarEntity shieldBar;
-	
-	public ShipPlayerEntity(AbstractScene scene, Team team,
+
+	public PlayerEntity(AbstractScene scene, Team team,
 			Vector2 initPosition, PlayerKeyMapping keys) {
 		super(scene, initPosition);
 		this.team = team;
@@ -51,26 +53,37 @@ public class ShipPlayerEntity extends AbstractShipPlayerEntity {
 		scene.addRenderedEntity(hpBar);
 		shieldBar = new ShieldBarEntity(scene, this);
 		scene.addRenderedEntity(shieldBar);
+		
 		bonus = new HashMap<BonusType, BonusUIEntity>();
 		LaserBonusUIEntity laserBonusEntity = new LaserBonusUIEntity(scene, this);
 		scene.addTexturedEntity(laserBonusEntity);
 		bonus.put(BonusType.LASER, laserBonusEntity);
+		TeamShieldBonusUIEntity teamShieldBonusEntity = new TeamShieldBonusUIEntity(scene, this);
+		scene.addTexturedEntity(teamShieldBonusEntity);
+		bonus.put(BonusType.TEAM_PROTECTION, teamShieldBonusEntity);
 	}
 
 	@Override
 	public void handleInput() {
 		
+		
+		//--------TESTS CONTROLS---------------//
 		if(InputHandler.isPressed(Input.Keys.K)){
 			getScene().addTexturedEntity(new LaserBonusEntity(getScene()));
 		}
 		
 		if(InputHandler.isPressed(Input.Keys.L)){
 			getScene().addTexturedEntity(new NexusHealBonusEntity(getScene()));
+		}	
+		
+		if(InputHandler.isPressed(Input.Keys.M)){
+			getScene().addTexturedEntity(new TeamShieldBonusEntity(getScene()));
 		}
 		
 		if(InputHandler.isPressed(Input.Keys.J)){
 			getScene().addTexturedEntity(new AsteroidEntity(getScene()));
 		}
+		//--------END TESTS CONTROLS------------//
 		
 		//Dirty
 		if(InputHandler.isDown(Input.Keys.ESCAPE)){
@@ -157,13 +170,18 @@ public class ShipPlayerEntity extends AbstractShipPlayerEntity {
 		if(InputHandler.isClicked(Input.Buttons.MIDDLE)){
 			if(bonus.get(BonusType.LASER).isVisible()){
 				shoot(ShootTypes.UNIQUE, new Vector2(InputHandler.mouseX, InputHandler.mouseY));
-				bonus.get(BonusType.LASER).setVisible(false);
+				useBonus(BonusType.LASER);
 			}
 		};
+		if(InputHandler.isPressed(keys.getKeyForAction(Actions.PROTECT))){
+			if(bonus.get(BonusType.TEAM_PROTECTION).isVisible()){
+				protect();
+				useBonus(BonusType.TEAM_PROTECTION);
+			}
+		}
 		
-		bonus.get(BonusType.LASER).handleInput();
 	}
-	
+
 	@Override
 	public void update(float dt) {
 		if(Team.BLUE.equals(team)){
@@ -173,6 +191,7 @@ public class ShipPlayerEntity extends AbstractShipPlayerEntity {
 		}
 		super.update(dt);
 		bonus.get(BonusType.LASER).update(dt);
+		bonus.get(BonusType.TEAM_PROTECTION).update(dt);
 	}
 	
 	@Override
@@ -181,6 +200,7 @@ public class ShipPlayerEntity extends AbstractShipPlayerEntity {
 		hpBar.destroy();
 		shieldBar.destroy();
 		bonus.get(BonusType.LASER).destroy();
+		bonus.get(BonusType.TEAM_PROTECTION).destroy();
 	}
 	
 	@Override
@@ -201,6 +221,7 @@ public class ShipPlayerEntity extends AbstractShipPlayerEntity {
 		shieldBar.setVisible(isVisible);
 		if(!isVisible){
 			bonus.get(BonusType.LASER).setVisible(false);
+			bonus.get(BonusType.TEAM_PROTECTION).setVisible(false);
 		}
 	}
 	

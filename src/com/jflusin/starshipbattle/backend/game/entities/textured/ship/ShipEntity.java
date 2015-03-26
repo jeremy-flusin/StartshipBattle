@@ -9,13 +9,15 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.jflusin.starshipbattle.backend.engine.handlers.inputs.InputHandler;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
+import com.jflusin.starshipbattle.backend.engine.views.scenes.BattleScene;
 import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.AbstractTexturedEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.AmmoEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.LaserEntity;
-import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.impl.FireEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.impl.EnergyEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.impl.FireEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.asteroid.AsteroidEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.player.impl.PlayerEntity;
 import com.jflusin.starshipbattle.backend.game.enums.ShootTypes;
 import com.jflusin.starshipbattle.backend.game.interfaces.Fighter;
 import com.jflusin.starshipbattle.backend.game.interfaces.IsSolid;
@@ -46,9 +48,13 @@ public abstract class ShipEntity extends AbstractTexturedEntity implements IsSol
 					InputHandler.getMousePosition()));
 			getModel().updateShield();
 			getModel().updateTurboLevel();
+			getModel().updateProtection();
 			if (getModel().isShieldActivated()
 					&& getModel().getCurrentShieldPower() > 0) {
 				getTexturedSprite().getSprite().setColor(Color.MAGENTA);
+			}
+			if(getModel().isInvicible()){
+				getTexturedSprite().getSprite().setColor(Color.YELLOW);
 			}
 		}else{
 			getTexturedSprite().getSprite().setColor(Color.DARK_GRAY);
@@ -104,9 +110,20 @@ public abstract class ShipEntity extends AbstractTexturedEntity implements IsSol
 		}
 	}
 	
+	public void protect(){
+		for(PlayerEntity player: getScene().getPlayers(getTeam())){
+			player.getModel().setInvicible(true);
+		}
+	}
+	
 	@Override
 	public void shootTargetTrack(ShootTypes type, AbstractEntity target) {
 		
+	}
+	
+	@Override
+	public BattleScene getScene() {
+		return (BattleScene)super.getScene();
 	}
 	
 }

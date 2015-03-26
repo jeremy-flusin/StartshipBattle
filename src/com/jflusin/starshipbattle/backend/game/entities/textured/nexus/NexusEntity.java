@@ -7,7 +7,7 @@ import com.jflusin.starshipbattle.backend.game.entities.rendered.info.bars.impl.
 import com.jflusin.starshipbattle.backend.game.entities.textured.AbstractTexturedEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.AmmoEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.impl.NexusShootEntity;
-import com.jflusin.starshipbattle.backend.game.entities.textured.player.impl.ShipPlayerEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.player.impl.PlayerEntity;
 import com.jflusin.starshipbattle.backend.game.enums.ShootTypes;
 import com.jflusin.starshipbattle.backend.game.interfaces.Fighter;
 import com.jflusin.starshipbattle.backend.game.interfaces.IsSolid;
@@ -40,7 +40,7 @@ public abstract class NexusEntity extends AbstractTexturedEntity implements IsSo
 
 	@Override
 	public void handleInput() {
-		for (ShipPlayerEntity player : getScene().getPlayers(TeamUtils.getOppositeTeam(getTeam()))) {
+		for (PlayerEntity player : getScene().getPlayers(TeamUtils.getOppositeTeam(getTeam()))) {
 			
 			if (getMinXToWatch() < player.getX() && player.getX() <= getMaxXToWatch()) {
 				if(getModel().canShoot()){

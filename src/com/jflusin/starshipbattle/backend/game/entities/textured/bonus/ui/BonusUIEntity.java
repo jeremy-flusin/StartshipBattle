@@ -10,13 +10,13 @@ import com.jflusin.starshipbattle.backend.engine.utils.B2DVars;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
 import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.AbstractTexturedEntity;
-import com.jflusin.starshipbattle.backend.game.entities.textured.player.impl.ShipPlayerEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.player.impl.PlayerEntity;
 
 public abstract class BonusUIEntity extends AbstractTexturedEntity {
 
-	protected ShipPlayerEntity player;
+	protected PlayerEntity player;
 	
-	public BonusUIEntity(AbstractScene scene, ShipPlayerEntity player, String texturePath) {
+	public BonusUIEntity(AbstractScene scene, PlayerEntity player, String texturePath) {
 		super(scene, texturePath, new Vector2(player.getPosition()), 20, 20, false);
 		this.player = player;
 		setVisible(false);
@@ -44,7 +44,7 @@ public abstract class BonusUIEntity extends AbstractTexturedEntity {
 
 	@Override
 	public void update(float dt) {
-		setX(player.getX());
+		setX(player.getX() + getPixelOffset());
 		setY(player.getY() + 100);
 		super.update(dt);
 	}
@@ -54,4 +54,5 @@ public abstract class BonusUIEntity extends AbstractTexturedEntity {
 
 	}
 
+	public abstract float getPixelOffset();
 }
