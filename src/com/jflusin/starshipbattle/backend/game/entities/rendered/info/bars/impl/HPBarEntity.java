@@ -1,6 +1,7 @@
 package com.jflusin.starshipbattle.backend.game.entities.rendered.info.bars.impl;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -22,7 +23,7 @@ public class HPBarEntity extends BarEntity {
 	}
 
 	@Override
-	public void render(ShapeRenderer sr) {
+	public void render(ShapeRenderer sr, SpriteBatch sb) {
 		sr.begin(ShapeType.Filled);
         sr.setColor(new Color(0.6f,0,0,1));
         sr.rect(getX(), getY() + 80, width, height);

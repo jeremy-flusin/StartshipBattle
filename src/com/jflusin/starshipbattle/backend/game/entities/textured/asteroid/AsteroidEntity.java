@@ -25,7 +25,7 @@ public class AsteroidEntity extends AbstractTexturedEntity implements IsSolid {
 	private static float MIN_VELOCITY = 1f;
 	
 	public AsteroidEntity(AbstractScene scene) {
-		super(scene, "res/asteroid-1.png", new Vector2(0,0), 190, 190, true);
+		super(scene, "res/asteroid-1.png", new Vector2(-200,-200), 190, 190, true);
 		Random r = new Random();
 		up = r.nextBoolean();
 		right = r.nextBoolean();

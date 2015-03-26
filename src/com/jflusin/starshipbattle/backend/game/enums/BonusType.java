@@ -1,5 +1,5 @@
 package com.jflusin.starshipbattle.backend.game.enums;
 
 public enum BonusType {
-	LASER
+	LASER, NEXUS_HEAL
 }

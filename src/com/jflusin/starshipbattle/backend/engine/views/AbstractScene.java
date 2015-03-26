@@ -153,4 +153,5 @@ public abstract class AbstractScene {
 			contactHandler.unregisterEntity(entity);
 		}
 	}
+	
 }

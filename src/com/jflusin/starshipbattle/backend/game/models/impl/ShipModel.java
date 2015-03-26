@@ -97,7 +97,18 @@ public class ShipModel extends AbstractModel implements FighterModel {
 		return currentLife > 0;
 	}
 	
+	public void heal(int heal){
+		currentLife += heal;
+		if(currentLife > MAX_LIFE){
+			currentLife = MAX_LIFE;
+		}
+	}
+	
 	public boolean isProtected() {
 		return isShieldActivated() && getCurrentShieldPower() > 0;
+	}
+
+	public void revive() {
+		currentLife = MAX_LIFE;
 	}
 }

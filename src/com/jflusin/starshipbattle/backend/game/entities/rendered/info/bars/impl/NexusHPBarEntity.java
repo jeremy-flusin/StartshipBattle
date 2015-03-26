@@ -1,5 +1,6 @@
 package com.jflusin.starshipbattle.backend.game.entities.rendered.info.bars.impl;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.jflusin.starshipbattle.backend.engine.main.Game;
@@ -12,11 +13,15 @@ import com.jflusin.starshipbattle.backend.game.models.impl.NexusModel;
 
 public abstract class NexusHPBarEntity extends BarEntity {
 
-	private NexusEntity nexus;
+	protected NexusEntity nexus;
 	private float value = 1f;
+	protected BitmapFont font;
+	
 	public NexusHPBarEntity(AbstractScene scene, NexusEntity nexus) {
 		super(scene, new Vector2(0,Game.V_HEIGHT - 30), Game.V_WIDTH/2, 30, false);
 		this.nexus = nexus;
+		font = new BitmapFont();
+		font.setScale(1.2f);
 	}
 
 	

@@ -51,4 +51,11 @@ public class NexusModel extends AbstractModel implements FighterModel{
 	public void setVulnerable(boolean nexusVulnerable) {
 		this.isVulnerable = nexusVulnerable;
 	}
+	
+	public void heal(int heal){
+		currentHP += heal;
+		if(currentHP > MAX_HP){
+			currentHP = MAX_HP;
+		}
+	}
 }

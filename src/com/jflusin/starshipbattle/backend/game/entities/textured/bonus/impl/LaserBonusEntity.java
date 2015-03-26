@@ -7,7 +7,7 @@ import com.jflusin.starshipbattle.backend.game.enums.BonusType;
 public class LaserBonusEntity extends BonusEntity {
 
 	public LaserBonusEntity(AbstractScene scene) {
-		super(scene, "res/bonus-laser.png");
+		super(scene, "res/bonus-laser.png", true);
 	}
 
 	@Override

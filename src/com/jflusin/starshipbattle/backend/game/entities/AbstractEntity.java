@@ -18,7 +18,8 @@ public abstract class AbstractEntity {
 	protected float angle;
 	protected UserData userData;
 	protected AbstractModel model;
-
+	private boolean isVisible = true;
+	
 	public AbstractEntity(AbstractScene scene, Vector2 initPosition, float width, float height, boolean collidable) {
 		this.scene = scene;
 		this.width = width;
@@ -126,4 +127,12 @@ public abstract class AbstractEntity {
 	public void endContact(AbstractEntity other){
 		
 	};
+	
+	public void setVisible(boolean isVisible) {
+		this.isVisible = isVisible;
+	}
+	
+	public boolean isVisible() {
+		return isVisible;
+	}
 }

@@ -17,6 +17,7 @@ import com.jflusin.starshipbattle.backend.game.entities.rendered.info.bars.impl.
 import com.jflusin.starshipbattle.backend.game.entities.textured.asteroid.AsteroidEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.BonusEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.impl.LaserBonusEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.impl.NexusHealBonusEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.ui.BonusUIEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.ui.impl.LaserBonusUIEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.player.AbstractShipPlayerEntity;
@@ -59,8 +60,12 @@ public class ShipPlayerEntity extends AbstractShipPlayerEntity {
 	@Override
 	public void handleInput() {
 		
-		if(InputHandler.isDown(Input.Keys.K)){
+		if(InputHandler.isPressed(Input.Keys.K)){
 			getScene().addTexturedEntity(new LaserBonusEntity(getScene()));
+		}
+		
+		if(InputHandler.isPressed(Input.Keys.L)){
+			getScene().addTexturedEntity(new NexusHealBonusEntity(getScene()));
 		}
 		
 		if(InputHandler.isPressed(Input.Keys.J)){
@@ -161,12 +166,12 @@ public class ShipPlayerEntity extends AbstractShipPlayerEntity {
 	
 	@Override
 	public void update(float dt) {
-		super.update(dt);
 		if(Team.BLUE.equals(team)){
 			getTexturedSprite().getSprite().setColor(Color.CYAN);
 		}else if (Team.RED.equals(team)){
 			getTexturedSprite().getSprite().setColor(Color.RED);
 		}
+		super.update(dt);
 		bonus.get(BonusType.LASER).update(dt);
 	}
 	
@@ -183,7 +188,19 @@ public class ShipPlayerEntity extends AbstractShipPlayerEntity {
 		super.onContact(other);
 		if(other instanceof BonusEntity){
 			BonusEntity bonus = (BonusEntity) other;
-			pickBonus(bonus.getType());
+			if(bonus.isPickable()){
+				pickBonus(bonus.getType());
+			}
+		}
+	}
+	
+	@Override
+	public void setVisible(boolean isVisible) {
+		super.setVisible(isVisible);
+		hpBar.setVisible(isVisible);
+		shieldBar.setVisible(isVisible);
+		if(!isVisible){
+			bonus.get(BonusType.LASER).setVisible(false);
 		}
 	}
 	

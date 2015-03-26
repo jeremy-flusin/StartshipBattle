@@ -79,9 +79,6 @@ public class LaserEntity extends AbstractTexturedEntity {
 			if(fighterModel instanceof FighterModel){
 				FighterModel fm = (FighterModel) fighterModel;
 				fm.takeDamage(200);
-				if(!fm.isAlive()){
-					fighter.destroy();
-				}
 			}
 		}
 	}

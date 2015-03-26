@@ -41,16 +41,17 @@ public abstract class ShipEntity extends AbstractTexturedEntity implements IsSol
 	@Override
 	public void update(float dt) {
 		super.update(dt);
-		setAngle(AngleUtils.getRadAngle(position,
-				InputHandler.getMousePosition()));
-		getModel().updateShield();
-		getModel().updateTurboLevel();
-		if (getModel().isShieldActivated()
-				&& getModel().getCurrentShieldPower() > 0) {
-			// FIXME: does not work
-			getTexturedSprite().getSprite().setColor(Color.MAGENTA);
-		} else {
-			getTexturedSprite().getSprite().setColor(Color.WHITE);
+		if(getModel().isAlive()){
+			setAngle(AngleUtils.getRadAngle(position,
+					InputHandler.getMousePosition()));
+			getModel().updateShield();
+			getModel().updateTurboLevel();
+			if (getModel().isShieldActivated()
+					&& getModel().getCurrentShieldPower() > 0) {
+				getTexturedSprite().getSprite().setColor(Color.MAGENTA);
+			}
+		}else{
+			getTexturedSprite().getSprite().setColor(Color.DARK_GRAY);
 		}
 	}
 
@@ -76,9 +77,6 @@ public abstract class ShipEntity extends AbstractTexturedEntity implements IsSol
 			AmmoEntity ammo = (AmmoEntity) other;
 			if (!ammo.getShooter().getTeam().equals(getTeam())) {
 				getModel().takeDamage(ammo.getCurrentPower());
-				if (getModel().getCurrentLife() <= 0) {
-					destroy();
-				}
 			}
 		}
 		if(other instanceof AsteroidEntity){
@@ -110,4 +108,5 @@ public abstract class ShipEntity extends AbstractTexturedEntity implements IsSol
 	public void shootTargetTrack(ShootTypes type, AbstractEntity target) {
 		
 	}
+	
 }

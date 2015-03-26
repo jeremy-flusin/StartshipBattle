@@ -16,8 +16,11 @@ import com.jflusin.starshipbattle.backend.game.enums.BonusType;
 
 public abstract class BonusEntity extends AbstractTexturedEntity {
 
-	public BonusEntity(AbstractScene scene, String texturePath) {
+	boolean pickable;
+	
+	public BonusEntity(AbstractScene scene, String texturePath, boolean pickable) {
 		super(scene, texturePath, new Vector2((Game.V_WIDTH / 2) - 20, (Game.V_HEIGHT / 2) - 20), 20, 20, true);
+		this.pickable = pickable;
 	}
 
 	@Override
@@ -50,4 +53,7 @@ public abstract class BonusEntity extends AbstractTexturedEntity {
 
 	public abstract BonusType getType();
 	
+	public boolean isPickable() {
+		return pickable;
+	}
 }
