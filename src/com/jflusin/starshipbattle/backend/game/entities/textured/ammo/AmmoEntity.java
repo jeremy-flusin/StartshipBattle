@@ -12,13 +12,14 @@ import com.jflusin.starshipbattle.backend.game.entities.textured.AbstractTexture
 import com.jflusin.starshipbattle.backend.game.interfaces.Fighter;
 import com.jflusin.starshipbattle.backend.game.interfaces.IsSolid;
 import com.jflusin.starshipbattle.backend.game.utils.AngleUtils;
+import com.jflusin.starshipbattle.backend.game.utils.BalancingConstants;
 
 public class AmmoEntity extends AbstractTexturedEntity {
 
-	protected static int INITIAL_POWER = 500;
+	protected static int INITIAL_POWER = BalancingConstants.MAX_ENERGY_HIT;
 	protected int currentPower = INITIAL_POWER;
 	
-	protected static float VELOCITY = 5f;
+	protected static float VELOCITY = BalancingConstants.ENERGY_VELOCITY;
 
 	private Fighter shooter;
 	

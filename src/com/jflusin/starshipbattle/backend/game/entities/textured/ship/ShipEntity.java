@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.jflusin.starshipbattle.backend.engine.handlers.inputs.InputHandler;
+import com.jflusin.starshipbattle.backend.engine.handlers.sound.effects.SoundType;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
 import com.jflusin.starshipbattle.backend.engine.views.scenes.BattleScene;
 import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
@@ -83,6 +84,7 @@ public abstract class ShipEntity extends AbstractTexturedEntity implements IsSol
 			AmmoEntity ammo = (AmmoEntity) other;
 			if (!ammo.getShooter().getTeam().equals(getTeam())) {
 				getModel().takeDamage(ammo.getCurrentPower());
+				getScene().getSFX().playRandom(SoundType.HITS);
 			}
 		}
 		if(other instanceof AsteroidEntity){

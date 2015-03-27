@@ -7,10 +7,11 @@ import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.BonusEnti
 import com.jflusin.starshipbattle.backend.game.enums.BonusType;
 import com.jflusin.starshipbattle.backend.game.enums.Team;
 import com.jflusin.starshipbattle.backend.game.interfaces.Fighter;
+import com.jflusin.starshipbattle.backend.game.utils.BalancingConstants;
 
 public class NexusHealBonusEntity extends BonusEntity {
 
-	private static final int HEAL = 4000;
+	private static final int HEAL = BalancingConstants.NEXUS_HEAL_BONUS_VALUE;
 	private boolean hasHealed = false;
 	
 	public NexusHealBonusEntity(AbstractScene scene) {

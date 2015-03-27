@@ -2,23 +2,24 @@ package com.jflusin.starshipbattle.backend.game.models.impl;
 
 import com.jflusin.starshipbattle.backend.game.interfaces.FighterModel;
 import com.jflusin.starshipbattle.backend.game.models.AbstractModel;
+import com.jflusin.starshipbattle.backend.game.utils.BalancingConstants;
 
 public class ShipModel extends AbstractModel implements FighterModel {
 
-	public static int MAX_LIFE = 500;
+	public static int MAX_LIFE = BalancingConstants.PLAYER_MAX_HP;
 	protected int currentLife = MAX_LIFE;
 	
-	public static int SHIELD_MAX_POWER = 1000;
+	public static int SHIELD_MAX_POWER = BalancingConstants.SHIELD_MAX_DURATION_FRAMES;
 	protected int currentShieldPower = SHIELD_MAX_POWER;
 	protected boolean shieldActivated;	
 	
-	protected static int TURBO_MAX_LEVEL= 1000;
+	protected static int TURBO_MAX_LEVEL = BalancingConstants.TURBO_MAX_DURATION_FRAMES;
 	protected int currentTurboLevel = TURBO_MAX_LEVEL;
 	protected boolean turboActivated;
-	protected float turboCoeff = 2f;
+	protected float turboCoeff = BalancingConstants.TURBO_COEFF;
 	
 	protected boolean invicible = false;
-	protected static int INVICIBLE_MAX_DURATION = 1000;
+	protected static int INVICIBLE_MAX_DURATION = BalancingConstants.INVINCIBLE_BONUS_MAX_DURATION_FRAMES;
 	protected int currentInvincibleDuration = 0;
 	
 	public ShipModel() {
@@ -33,7 +34,7 @@ public class ShipModel extends AbstractModel implements FighterModel {
 	public void takeDamage(int damage){
 		if(!isInvicible()){
 			if(isProtected()){
-				damage /= 5d;
+				damage /= BalancingConstants.SHIELD_COEFF;
 			}
 			currentLife -= damage;
 			if(currentLife < 0){
@@ -130,7 +131,6 @@ public class ShipModel extends AbstractModel implements FighterModel {
 	}
 
 	public void updateProtection() {
-		System.out.println(currentInvincibleDuration);
 		if(invicible){
 			currentInvincibleDuration --;
 			if(currentInvincibleDuration < 0){

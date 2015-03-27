@@ -1,6 +1,7 @@
 package com.jflusin.starshipbattle.backend.game.entities.textured.nexus;
 
 import com.badlogic.gdx.math.Vector2;
+import com.jflusin.starshipbattle.backend.engine.handlers.sound.effects.SoundType;
 import com.jflusin.starshipbattle.backend.engine.views.scenes.BattleScene;
 import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
 import com.jflusin.starshipbattle.backend.game.entities.rendered.info.bars.impl.NexusHPBarEntity;
@@ -31,6 +32,7 @@ public abstract class NexusEntity extends AbstractTexturedEntity implements IsSo
 			Fighter shooter = (Fighter) ammo.getShooter();
 			if (!getTeam().equals(shooter.getTeam())) {
 				getModel().takeDamage(ammo.getCurrentPower());
+				getScene().getSFX().playRandom(SoundType.HITS);
 				if(getModel().getCurrentHP() <= 0){
 					destroy();
 				}

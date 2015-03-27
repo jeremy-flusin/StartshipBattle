@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.jflusin.starshipbattle.backend.engine.handlers.sound.effects.SoundType;
 import com.jflusin.starshipbattle.backend.engine.main.Game;
 import com.jflusin.starshipbattle.backend.engine.utils.B2DVars;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
@@ -47,6 +48,7 @@ public abstract class BonusEntity extends AbstractTexturedEntity {
 	@Override
 	public void onContact(AbstractEntity other) {
 		if(other instanceof ShipEntity){
+			getScene().getSFX().playRandom(SoundType.POWER_UP);
 			destroy();
 		}
 	}

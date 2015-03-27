@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.jflusin.starshipbattle.backend.engine.handlers.inputs.Actions;
 import com.jflusin.starshipbattle.backend.engine.handlers.inputs.InputHandler;
 import com.jflusin.starshipbattle.backend.engine.handlers.inputs.PlayerKeyMapping;
+import com.jflusin.starshipbattle.backend.engine.handlers.sound.effects.SoundType;
 import com.jflusin.starshipbattle.backend.engine.main.Game;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
 import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
@@ -26,11 +27,12 @@ import com.jflusin.starshipbattle.backend.game.entities.textured.player.Abstract
 import com.jflusin.starshipbattle.backend.game.enums.BonusType;
 import com.jflusin.starshipbattle.backend.game.enums.ShootTypes;
 import com.jflusin.starshipbattle.backend.game.enums.Team;
+import com.jflusin.starshipbattle.backend.game.utils.BalancingConstants;
 
 
 public class PlayerEntity extends AbstractShipPlayerEntity {
 
-	public static float MAX_VELOCITY = 10f;
+	public static float MAX_VELOCITY = BalancingConstants.SHIP_VELOCITY;
 	public static float ACCELERATION = 0.8f;
 	public static float DECELERATION = 0.5f;
 	public static float TURBO = 2f;
@@ -163,6 +165,7 @@ public class PlayerEntity extends AbstractShipPlayerEntity {
 		
 		if(InputHandler.isClicked(Input.Buttons.LEFT)){
 			shoot(ShootTypes.PRIMARY, new Vector2(InputHandler.mouseX, InputHandler.mouseY));
+			getScene().getSFX().playRandom(SoundType.LASER);
 		};
 		if(InputHandler.isClicked(Input.Buttons.RIGHT)){
 			shoot(ShootTypes.SECONDARY, new Vector2(InputHandler.mouseX, InputHandler.mouseY));
@@ -208,6 +211,7 @@ public class PlayerEntity extends AbstractShipPlayerEntity {
 		super.onContact(other);
 		if(other instanceof BonusEntity){
 			BonusEntity bonus = (BonusEntity) other;
+
 			if(bonus.isPickable()){
 				pickBonus(bonus.getType());
 			}

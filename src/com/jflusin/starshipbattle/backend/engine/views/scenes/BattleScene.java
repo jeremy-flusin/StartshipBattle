@@ -116,6 +116,9 @@ public class BattleScene extends AbstractScene {
 		bsw.watch();
 		tw.watch();
 		eventHandler.watch();
+		if (!jukebox.isPlaying()) {
+			jukebox.playRandomTrack();
+		}
 	}
 
 	@Override
@@ -156,4 +159,5 @@ public class BattleScene extends AbstractScene {
 			playerEntity.getModel().revive();
 		}
 	}
+
 }

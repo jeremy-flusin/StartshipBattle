@@ -2,12 +2,13 @@ package com.jflusin.starshipbattle.backend.game.models.impl;
 
 import com.jflusin.starshipbattle.backend.game.interfaces.FighterModel;
 import com.jflusin.starshipbattle.backend.game.models.AbstractModel;
+import com.jflusin.starshipbattle.backend.game.utils.BalancingConstants;
 
 public class NexusModel extends AbstractModel implements FighterModel{
 
-	public static int MAX_HP = 20000;
+	public static int MAX_HP = BalancingConstants.NEXUS_MAX_HP;
 	protected int currentHP = MAX_HP;
-	protected static int MAX_COOLDOWN = 20;
+	protected static int MAX_COOLDOWN = BalancingConstants.NEXUS_COOLDOWN_FRAMES_BETWEEN_SHOOTS;
 	protected int shootCooldown = MAX_COOLDOWN;
 	protected boolean isVulnerable = false;
 	

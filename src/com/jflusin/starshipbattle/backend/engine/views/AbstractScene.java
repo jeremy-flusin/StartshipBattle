@@ -13,6 +13,8 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.jflusin.starshipbattle.backend.engine.handlers.contact.ContactHandler;
+import com.jflusin.starshipbattle.backend.engine.handlers.sound.effects.SoundEffectPlayer;
+import com.jflusin.starshipbattle.backend.engine.handlers.sound.music.MusicPlayer;
 import com.jflusin.starshipbattle.backend.engine.main.Game;
 import com.jflusin.starshipbattle.backend.engine.utils.ContentManager;
 import com.jflusin.starshipbattle.backend.engine.utils.SceneManager;
@@ -41,7 +43,9 @@ public abstract class AbstractScene {
 	protected AbstractEntity player;
 	protected SceneData sd;
 	protected TimeWatcher tw;
-	
+	protected MusicPlayer jukebox;
+	protected SoundEffectPlayer sfx;
+
 	public AbstractScene(SceneManager sm, SceneData sd) {
 		this.sm = sm;
 		this.sd = sd;
@@ -51,6 +55,8 @@ public abstract class AbstractScene {
 		cam = game.getCamera();
 		cm = new ContentManager();
 		tw = new TimeWatcher();
+		jukebox = new MusicPlayer();
+		sfx = new SoundEffectPlayer();
 		if (Game.IS_DEBUG) {
 			b2dr = new Box2DDebugRenderer();
 		}
@@ -154,4 +160,7 @@ public abstract class AbstractScene {
 		}
 	}
 	
+	public SoundEffectPlayer getSFX() {
+		return sfx;
+	}
 }

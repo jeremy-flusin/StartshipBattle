@@ -17,6 +17,7 @@ import com.jflusin.starshipbattle.backend.game.entities.textured.ship.ShipEntity
 import com.jflusin.starshipbattle.backend.game.interfaces.Fighter;
 import com.jflusin.starshipbattle.backend.game.interfaces.FighterModel;
 import com.jflusin.starshipbattle.backend.game.models.AbstractModel;
+import com.jflusin.starshipbattle.backend.game.utils.BalancingConstants;
 
 public class LaserEntity extends AbstractTexturedEntity {
 
@@ -28,6 +29,7 @@ public class LaserEntity extends AbstractTexturedEntity {
 		super(scene, "res/laser.png", initPosition, Game.V_WIDTH, 50, true);
 		this.shooter = shooter;
 		touchedEntities = new ArrayList<Fighter>();
+		getScene().getSFX().playLaserBonusSound();
 	}
 
 	@Override
@@ -78,7 +80,7 @@ public class LaserEntity extends AbstractTexturedEntity {
 			AbstractModel fighterModel = fighter.getModel();
 			if(fighterModel instanceof FighterModel){
 				FighterModel fm = (FighterModel) fighterModel;
-				fm.takeDamage(200);
+				fm.takeDamage(BalancingConstants.LASER_HIT_PER_FRAME);
 			}
 		}
 	}
