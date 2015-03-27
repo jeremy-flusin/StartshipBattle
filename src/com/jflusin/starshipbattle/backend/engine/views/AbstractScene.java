@@ -45,6 +45,7 @@ public abstract class AbstractScene {
 	protected TimeWatcher tw;
 	protected MusicPlayer jukebox;
 	protected SoundEffectPlayer sfx;
+	protected MessageHandler messageHandler;
 
 	public AbstractScene(SceneManager sm, SceneData sd) {
 		this.sm = sm;
@@ -57,6 +58,7 @@ public abstract class AbstractScene {
 		tw = new TimeWatcher();
 		jukebox = new MusicPlayer();
 		sfx = new SoundEffectPlayer();
+		messageHandler = new MessageHandler();
 		if (Game.IS_DEBUG) {
 			b2dr = new Box2DDebugRenderer();
 		}
@@ -162,5 +164,9 @@ public abstract class AbstractScene {
 	
 	public SoundEffectPlayer getSFX() {
 		return sfx;
+	}
+
+	public MessageHandler getMessageHandler() {
+		return messageHandler;
 	}
 }

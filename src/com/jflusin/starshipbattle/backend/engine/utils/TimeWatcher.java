@@ -1,11 +1,12 @@
 package com.jflusin.starshipbattle.backend.engine.utils;
 
+import com.jflusin.starshipbattle.backend.game.utils.BalancingConstants;
 
 
 public class TimeWatcher {
 	
 	private int frames;
-	private static final int GAME_SPEED = 5;
+	private static final int GAME_SPEED = BalancingConstants.GAME_SPEED;
 	
 	public TimeWatcher() {
 		

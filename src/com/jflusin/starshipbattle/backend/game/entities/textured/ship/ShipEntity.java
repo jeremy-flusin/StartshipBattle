@@ -24,6 +24,7 @@ import com.jflusin.starshipbattle.backend.game.interfaces.Fighter;
 import com.jflusin.starshipbattle.backend.game.interfaces.IsSolid;
 import com.jflusin.starshipbattle.backend.game.models.impl.ShipModel;
 import com.jflusin.starshipbattle.backend.game.utils.AngleUtils;
+import com.jflusin.starshipbattle.backend.game.utils.BalancingConstants;
 
 public abstract class ShipEntity extends AbstractTexturedEntity implements IsSolid,
 		Fighter {
@@ -88,9 +89,7 @@ public abstract class ShipEntity extends AbstractTexturedEntity implements IsSol
 			}
 		}
 		if(other instanceof AsteroidEntity){
-			this.acceleration.x = 0;
-			this.acceleration.y = 0;
-			getModel().takeDamage(10);
+			getModel().takeDamage(BalancingConstants.ASTEROID_DAMAGE);
 		}
 	}
 

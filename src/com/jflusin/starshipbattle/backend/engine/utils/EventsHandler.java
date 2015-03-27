@@ -39,7 +39,7 @@ public class EventsHandler {
 	}
 
 	private boolean every60Seconds() {
-		return tw.getSeconds() == 0;
+		return tw.getSeconds() == 59;
 	}
 
 }

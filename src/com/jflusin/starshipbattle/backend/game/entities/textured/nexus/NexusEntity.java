@@ -70,6 +70,7 @@ public abstract class NexusEntity extends AbstractTexturedEntity implements IsSo
 	public void shootTargetTrack(ShootTypes type, AbstractEntity target) {
 		scene.addTexturedEntity(new NexusShootEntity(
 				scene, new Vector2(getX(), getY() + height/2 - 40), target, this));
+		getScene().getSFX().playRandom(SoundType.LASER);
 		getModel().setShootCooldown(0);
 	}
 	

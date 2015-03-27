@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.jflusin.starshipbattle.backend.engine.utils.SceneManager;
 import com.jflusin.starshipbattle.backend.game.entities.textured.player.impl.PlayerEntity;
 import com.jflusin.starshipbattle.backend.game.enums.Team;
+import com.jflusin.starshipbattle.backend.game.utils.Constants;
 
 
 public class BattleSceneWatcher {
@@ -27,6 +28,10 @@ public class BattleSceneWatcher {
 				blueNexusVulnerable = false;
 			}
 		}
+		if (blueNexusVulnerable) {
+			scene.getMessageHandler().shout(
+					Constants.NEXUS_VULNERABLE(Team.BLUE), 100);
+		}
 		scene.getNexusBlue().getModel().setVulnerable(blueNexusVulnerable);
 		boolean redNexusVulnerable = true;
 		ArrayList<PlayerEntity> redPlayers = scene.getPlayers(Team.RED);
@@ -34,6 +39,10 @@ public class BattleSceneWatcher {
 			if(redPlayer.getModel().isAlive()){
 				redNexusVulnerable = false;
 			}
+		}
+		if (redNexusVulnerable) {
+			scene.getMessageHandler().shout(
+					Constants.NEXUS_VULNERABLE(Team.RED), 100);
 		}
 		scene.getNexusRed().getModel().setVulnerable(redNexusVulnerable);
 		

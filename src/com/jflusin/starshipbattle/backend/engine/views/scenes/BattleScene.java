@@ -29,6 +29,7 @@ import com.jflusin.starshipbattle.backend.game.entities.textured.nexus.impl.Nexu
 import com.jflusin.starshipbattle.backend.game.entities.textured.player.impl.PlayerEntity;
 import com.jflusin.starshipbattle.backend.game.enums.BonusType;
 import com.jflusin.starshipbattle.backend.game.enums.Team;
+import com.jflusin.starshipbattle.backend.game.utils.Constants;
 
 public class BattleScene extends AbstractScene {
 	private PlayerEntity playerBlue;
@@ -108,6 +109,7 @@ public class BattleScene extends AbstractScene {
 		sb.begin();
 		font.draw(sb, tw.getMinutesString() + ":" + tw.getSecondsString(), Game.V_WIDTH / 2 - 9, Game.V_HEIGHT - 50);
 		sb.end();
+		messageHandler.render(sb);
 	}
 
 	@Override
@@ -119,6 +121,7 @@ public class BattleScene extends AbstractScene {
 		if (!jukebox.isPlaying()) {
 			jukebox.playRandomTrack();
 		}
+		messageHandler.update();
 	}
 
 	@Override
@@ -141,6 +144,7 @@ public class BattleScene extends AbstractScene {
 	
 	public void eventAsteroids(){
 		addTexturedEntity(new AsteroidEntity(this));
+		messageHandler.shout(Constants.ASTEROIDS_INCOMMING, 100);
 	}
 
 	public void eventBonus() {
@@ -151,12 +155,16 @@ public class BattleScene extends AbstractScene {
 		}else if (BonusType.NEXUS_HEAL.equals(type)){
 			addTexturedEntity(new NexusHealBonusEntity(this));
 		}
+		messageHandler.shout(Constants.BONUS_APPERANCE, 100);
 	}
 
 	public void eventRevivePlayers() {
 		for (Object player : players.values()) {
 			PlayerEntity playerEntity = (PlayerEntity)player;
-			playerEntity.getModel().revive();
+			if (!playerEntity.getModel().isAlive()) {
+				messageHandler.shout(Constants.REVIVE_EVENT, 100);
+				playerEntity.getModel().revive();
+			}
 		}
 	}
 
