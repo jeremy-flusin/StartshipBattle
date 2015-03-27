@@ -12,7 +12,7 @@ public abstract class BalancingConstants {
 	public static final float SHIP_VELOCITY = 10f;
 
 	public static final int MAX_ENERGY_HIT = 500;
-	public static final int LASER_HIT_PER_FRAME = 300;
+	public static final int LASER_HIT_PER_FRAME = 50;
 
 	public static final int TURBO_MAX_DURATION_FRAMES = 1500;
 	public static final float TURBO_COEFF = 2f;
