@@ -22,24 +22,18 @@ public class EventsHandler {
 	}
 	
 	private void handleEvents(int seconds){
-		if(every60Seconds()){
-			scene.eventBonus();
-		}
-		if(every30Seconds()){
+		if (secondsEqualTo(0) || secondsEqualTo(30)) {
 			scene.eventRevivePlayers();
 		}
-		if(every60Seconds()){
+		if (secondsEqualTo(15)) {
 			scene.eventAsteroids();
+		}
+		if (secondsEqualTo(45)) {
+			scene.eventBonus();
 		}
 	}
 
-	private boolean every30Seconds() {
-		int seconds = tw.getSeconds();
-		return seconds == 0 || seconds == 30;
+	private boolean secondsEqualTo(int seconds) {
+		return tw.getSeconds() == seconds;
 	}
-
-	private boolean every60Seconds() {
-		return tw.getSeconds() == 59;
-	}
-
 }

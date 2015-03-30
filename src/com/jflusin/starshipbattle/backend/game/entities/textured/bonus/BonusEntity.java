@@ -13,15 +13,24 @@ import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
 import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.AbstractTexturedEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.ship.ShipEntity;
+import com.jflusin.starshipbattle.backend.game.enums.BonusSpawn;
 import com.jflusin.starshipbattle.backend.game.enums.BonusType;
 
 public abstract class BonusEntity extends AbstractTexturedEntity {
 
-	boolean pickable;
-	
-	public BonusEntity(AbstractScene scene, String texturePath, boolean pickable) {
+	private boolean pickable;
+
+	public BonusEntity(AbstractScene scene, BonusSpawn spawn,
+			String texturePath, boolean pickable) {
 		super(scene, texturePath, new Vector2((Game.V_WIDTH / 2) - 20, (Game.V_HEIGHT / 2) - 20), 20, 20, true);
 		this.pickable = pickable;
+		if (BonusSpawn.TOP.equals(spawn)) {
+			setY(2 * Game.V_HEIGHT / 3);
+		} else if (BonusSpawn.MIDDLE.equals(spawn)) {
+			setY(Game.V_HEIGHT / 2);
+		} else if (BonusSpawn.BOTTOM.equals(spawn)) {
+			setY(Game.V_HEIGHT / 3);
+		}
 	}
 
 	@Override

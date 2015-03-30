@@ -22,11 +22,13 @@ import com.jflusin.starshipbattle.backend.game.entities.textured.AbstractTexture
 import com.jflusin.starshipbattle.backend.game.entities.textured.asteroid.AsteroidEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.impl.LaserBonusEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.impl.NexusHealBonusEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.impl.TeamShieldBonusEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.fixed.impl.BackgroundEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.nexus.NexusEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.nexus.impl.NexusBlueEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.nexus.impl.NexusRedEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.player.impl.PlayerEntity;
+import com.jflusin.starshipbattle.backend.game.enums.BonusSpawn;
 import com.jflusin.starshipbattle.backend.game.enums.BonusType;
 import com.jflusin.starshipbattle.backend.game.enums.Team;
 import com.jflusin.starshipbattle.backend.game.utils.Constants;
@@ -150,10 +152,14 @@ public class BattleScene extends AbstractScene {
 	public void eventBonus() {
 		Random r = new Random();
 		BonusType type = BonusType.values()[r.nextInt(BonusType.values().length)];
+		BonusSpawn spawn = BonusSpawn.values()[r
+				.nextInt(BonusSpawn.values().length)];
 		if(BonusType.LASER.equals(type)){
-			addTexturedEntity(new LaserBonusEntity(this));
+			addTexturedEntity(new LaserBonusEntity(this, spawn));
 		}else if (BonusType.NEXUS_HEAL.equals(type)){
-			addTexturedEntity(new NexusHealBonusEntity(this));
+			addTexturedEntity(new NexusHealBonusEntity(this, spawn));
+		} else if (BonusType.TEAM_PROTECTION.equals(type)) {
+			addTexturedEntity(new TeamShieldBonusEntity(this, spawn));
 		}
 		messageHandler.shout(Constants.BONUS_APPERANCE, 100);
 	}

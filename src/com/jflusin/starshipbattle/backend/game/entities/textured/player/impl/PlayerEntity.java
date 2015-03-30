@@ -24,6 +24,7 @@ import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.ui.BonusU
 import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.ui.impl.LaserBonusUIEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.ui.impl.TeamShieldBonusUIEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.player.AbstractShipPlayerEntity;
+import com.jflusin.starshipbattle.backend.game.enums.BonusSpawn;
 import com.jflusin.starshipbattle.backend.game.enums.BonusType;
 import com.jflusin.starshipbattle.backend.game.enums.ShootTypes;
 import com.jflusin.starshipbattle.backend.game.enums.Team;
@@ -71,15 +72,18 @@ public class PlayerEntity extends AbstractShipPlayerEntity {
 		
 		//--------TESTS CONTROLS---------------//
 		if(InputHandler.isPressed(Input.Keys.K)){
-			getScene().addTexturedEntity(new LaserBonusEntity(getScene()));
+			getScene().addTexturedEntity(
+					new LaserBonusEntity(getScene(), BonusSpawn.TOP));
 		}
 		
 		if(InputHandler.isPressed(Input.Keys.L)){
-			getScene().addTexturedEntity(new NexusHealBonusEntity(getScene()));
+			getScene().addTexturedEntity(
+					new NexusHealBonusEntity(getScene(), BonusSpawn.MIDDLE));
 		}	
 		
 		if(InputHandler.isPressed(Input.Keys.M)){
-			getScene().addTexturedEntity(new TeamShieldBonusEntity(getScene()));
+			getScene().addTexturedEntity(
+					new TeamShieldBonusEntity(getScene(), BonusSpawn.BOTTOM));
 		}
 		
 		if(InputHandler.isPressed(Input.Keys.J)){
