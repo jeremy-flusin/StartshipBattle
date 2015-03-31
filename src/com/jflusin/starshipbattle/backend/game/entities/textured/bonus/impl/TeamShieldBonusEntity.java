@@ -1,5 +1,6 @@
 package com.jflusin.starshipbattle.backend.game.entities.textured.bonus.impl;
 
+import com.badlogic.gdx.graphics.Color;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
 import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.BonusEntity;
 import com.jflusin.starshipbattle.backend.game.enums.BonusSpawn;
@@ -11,6 +12,7 @@ public class TeamShieldBonusEntity extends BonusEntity {
 	
 	public TeamShieldBonusEntity(AbstractScene scene, BonusSpawn spawn) {
 		super(scene, spawn, "res/bonus-shield.png", true);
+		getTexturedSprite().getSprite().setColor(Color.YELLOW);
 	}
 
 	@Override

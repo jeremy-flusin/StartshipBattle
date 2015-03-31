@@ -1,5 +1,6 @@
 package com.jflusin.starshipbattle.backend.game.entities.textured.bonus.impl;
 
+import com.badlogic.gdx.graphics.Color;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
 import com.jflusin.starshipbattle.backend.engine.views.scenes.BattleScene;
 import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
@@ -17,6 +18,7 @@ public class NexusHealBonusEntity extends BonusEntity {
 	
 	public NexusHealBonusEntity(AbstractScene scene, BonusSpawn spawn) {
 		super(scene, spawn, "res/bonus-nexus-heal.png", false);
+		getTexturedSprite().getSprite().setColor(Color.GREEN);
 	}
 
 	@Override

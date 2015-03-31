@@ -22,7 +22,8 @@ public abstract class BonusEntity extends AbstractTexturedEntity {
 
 	public BonusEntity(AbstractScene scene, BonusSpawn spawn,
 			String texturePath, boolean pickable) {
-		super(scene, texturePath, new Vector2((Game.V_WIDTH / 2) - 20, (Game.V_HEIGHT / 2) - 20), 20, 20, true);
+		super(scene, texturePath, new Vector2((Game.V_WIDTH / 2) - 20,
+				(Game.V_HEIGHT / 2) - 20), 40, 40, true);
 		this.pickable = pickable;
 		if (BonusSpawn.TOP.equals(spawn)) {
 			setY(2 * Game.V_HEIGHT / 3);
