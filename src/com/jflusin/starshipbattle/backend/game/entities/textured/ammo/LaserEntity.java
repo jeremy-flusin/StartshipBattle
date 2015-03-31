@@ -14,6 +14,7 @@ import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
 import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.AbstractTexturedEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.ship.ShipEntity;
+import com.jflusin.starshipbattle.backend.game.enums.Team;
 import com.jflusin.starshipbattle.backend.game.interfaces.Fighter;
 import com.jflusin.starshipbattle.backend.game.interfaces.FighterModel;
 import com.jflusin.starshipbattle.backend.game.models.AbstractModel;
@@ -70,7 +71,11 @@ public class LaserEntity extends AbstractTexturedEntity {
 	@Override
 	public void update(float dt) {
 		super.update(dt);
-		setX(shooter.getX());
+		float x = shooter.getX();
+		if (Team.RED.equals(shooter.getTeam())) {
+			x = x - width;
+		}
+		setX(x);
 		setY(shooter.getY() + 10);
 		duration -= 1;
 		if(duration <= 0){
