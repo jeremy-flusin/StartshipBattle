@@ -71,23 +71,29 @@ public class PlayerEntity extends AbstractPlayerEntity {
 		
 		
 		//--------TESTS CONTROLS---------------//
-		if(InputHandler.isPressed(Input.Keys.K)){
-			getScene().addTexturedEntity(
-					new LaserBonusEntity(getScene(), BonusSpawn.TOP));
-		}
-		
-		if(InputHandler.isPressed(Input.Keys.L)){
-			getScene().addTexturedEntity(
-					new NexusHealBonusEntity(getScene(), BonusSpawn.MIDDLE));
-		}	
-		
-		if(InputHandler.isPressed(Input.Keys.M)){
-			getScene().addTexturedEntity(
-					new TeamShieldBonusEntity(getScene(), BonusSpawn.BOTTOM));
-		}
-		
-		if(InputHandler.isPressed(Input.Keys.J)){
-			getScene().addTexturedEntity(new AsteroidEntity(getScene()));
+		if (Game.IS_DEBUG) {
+			if (InputHandler.isPressed(Input.Keys.K)) {
+				getScene().addTexturedEntity(
+						new LaserBonusEntity(getScene(), BonusSpawn.TOP));
+			}
+
+			if (InputHandler.isPressed(Input.Keys.L)) {
+				getScene()
+						.addTexturedEntity(
+								new NexusHealBonusEntity(getScene(),
+										BonusSpawn.MIDDLE));
+			}
+
+			if (InputHandler.isPressed(Input.Keys.M)) {
+				getScene()
+						.addTexturedEntity(
+								new TeamShieldBonusEntity(getScene(),
+										BonusSpawn.BOTTOM));
+			}
+
+			if (InputHandler.isPressed(Input.Keys.J)) {
+				getScene().addTexturedEntity(new AsteroidEntity(getScene()));
+			}
 		}
 		//--------END TESTS CONTROLS------------//
 		
@@ -170,9 +176,6 @@ public class PlayerEntity extends AbstractPlayerEntity {
 		if(InputHandler.isClicked(Input.Buttons.LEFT)){
 			shoot(ShootTypes.PRIMARY, new Vector2(InputHandler.mouseX, InputHandler.mouseY));
 			getScene().getSFX().playRandom(SoundType.LASER);
-		};
-		if(InputHandler.isClicked(Input.Buttons.RIGHT)){
-			shoot(ShootTypes.SECONDARY, new Vector2(InputHandler.mouseX, InputHandler.mouseY));
 		};
 		if(InputHandler.isClicked(Input.Buttons.MIDDLE)){
 			if(bonus.get(BonusType.LASER).isVisible()){

@@ -30,7 +30,7 @@ public class BattleSceneWatcher {
 		}
 		if (blueNexusVulnerable) {
 			scene.getMessageHandler().shout(
-					Constants.NEXUS_VULNERABLE(Team.BLUE), 100);
+					Constants.NEXUS_VULNERABLE(Team.BLUE));
 		}
 		scene.getNexusBlue().getModel().setVulnerable(blueNexusVulnerable);
 		boolean redNexusVulnerable = true;
@@ -42,7 +42,7 @@ public class BattleSceneWatcher {
 		}
 		if (redNexusVulnerable) {
 			scene.getMessageHandler().shout(
-					Constants.NEXUS_VULNERABLE(Team.RED), 100);
+					Constants.NEXUS_VULNERABLE(Team.RED));
 		}
 		scene.getNexusRed().getModel().setVulnerable(redNexusVulnerable);
 		

@@ -19,6 +19,11 @@ public class MessageHandler {
 		this.duration = duration;
 	}
 
+	public void shout(String message) {
+		this.message = message;
+		this.duration = 300;
+	}
+
 	public void render(SpriteBatch sb) {
 		if (message != null) {
 			sb.begin();

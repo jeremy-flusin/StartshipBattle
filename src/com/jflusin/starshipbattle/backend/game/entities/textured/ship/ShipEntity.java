@@ -16,7 +16,6 @@ import com.jflusin.starshipbattle.backend.game.entities.textured.AbstractTexture
 import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.AmmoEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.LaserEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.impl.EnergyEntity;
-import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.impl.FireEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.asteroid.AsteroidEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.player.impl.PlayerEntity;
 import com.jflusin.starshipbattle.backend.game.enums.ShootTypes;
@@ -101,9 +100,6 @@ public abstract class ShipEntity extends AbstractTexturedEntity implements IsSol
 	public void shoot(ShootTypes type, Vector2 target) {
 		if (ShootTypes.PRIMARY.equals(type)) {
 			scene.addTexturedEntity(new EnergyEntity(scene, new Vector2(this.position.x,
-					this.position.y), target, this));
-		} else if (ShootTypes.SECONDARY.equals(type)) {
-			scene.addTexturedEntity(new FireEntity(scene, new Vector2(this.position.x,
 					this.position.y), target, this));
 		} else if (ShootTypes.UNIQUE.equals(type)) {
 			scene.addTexturedEntity(new LaserEntity(scene, new Vector2(this.position.x,

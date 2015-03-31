@@ -146,7 +146,7 @@ public class BattleScene extends AbstractScene {
 	
 	public void eventAsteroids(){
 		addTexturedEntity(new AsteroidEntity(this));
-		messageHandler.shout(Constants.ASTEROIDS_INCOMMING, 100);
+		messageHandler.shout(Constants.ASTEROIDS_INCOMMING);
 	}
 
 	public void eventBonus() {
@@ -161,14 +161,14 @@ public class BattleScene extends AbstractScene {
 		} else if (BonusType.TEAM_PROTECTION.equals(type)) {
 			addTexturedEntity(new TeamShieldBonusEntity(this, spawn));
 		}
-		messageHandler.shout(Constants.BONUS_APPERANCE, 100);
+		messageHandler.shout(Constants.BONUS_APPERANCE);
 	}
 
 	public void eventRevivePlayers() {
 		for (Object player : players.values()) {
 			PlayerEntity playerEntity = (PlayerEntity)player;
 			if (!playerEntity.getModel().isAlive()) {
-				messageHandler.shout(Constants.REVIVE_EVENT, 100);
+				messageHandler.shout(Constants.REVIVE_EVENT);
 				playerEntity.getModel().revive();
 			}
 		}

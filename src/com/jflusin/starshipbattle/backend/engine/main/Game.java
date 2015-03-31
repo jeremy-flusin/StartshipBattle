@@ -11,7 +11,7 @@ import com.jflusin.starshipbattle.backend.engine.utils.SceneManager;
 import com.jflusin.starshipbattle.backend.engine.views.scenes.SceneData;
 
 public class Game implements ApplicationListener {
-	public static final boolean IS_DEBUG = false;
+	public static final boolean IS_DEBUG = true;
 	public static final String TITLE = "Starship Battle";
 	public static final String VERSION = "0.0.1-Alpha";
 	public static final int V_WIDTH = 1920;
