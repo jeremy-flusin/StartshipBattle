@@ -8,10 +8,10 @@ import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
 import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.impl.FireEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.ammo.impl.EnergyEntity;
-import com.jflusin.starshipbattle.backend.game.entities.textured.player.AbstractShipPlayerEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.player.AbstractPlayerEntity;
 import com.jflusin.starshipbattle.backend.game.enums.Team;
 
-public class DumbShipIAEntity extends AbstractShipPlayerEntity {
+public class DumbShipIAEntity extends AbstractPlayerEntity {
 
 	public int time = 0;
 	private AbstractEntity target;

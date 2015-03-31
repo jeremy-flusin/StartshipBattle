@@ -23,7 +23,7 @@ import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.impl.Team
 import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.ui.BonusUIEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.ui.impl.LaserBonusUIEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.bonus.ui.impl.TeamShieldBonusUIEntity;
-import com.jflusin.starshipbattle.backend.game.entities.textured.player.AbstractShipPlayerEntity;
+import com.jflusin.starshipbattle.backend.game.entities.textured.player.AbstractPlayerEntity;
 import com.jflusin.starshipbattle.backend.game.enums.BonusSpawn;
 import com.jflusin.starshipbattle.backend.game.enums.BonusType;
 import com.jflusin.starshipbattle.backend.game.enums.ShootTypes;
@@ -31,7 +31,7 @@ import com.jflusin.starshipbattle.backend.game.enums.Team;
 import com.jflusin.starshipbattle.backend.game.utils.BalancingConstants;
 
 
-public class PlayerEntity extends AbstractShipPlayerEntity {
+public class PlayerEntity extends AbstractPlayerEntity {
 
 	public static float MAX_VELOCITY = BalancingConstants.SHIP_VELOCITY;
 	public static float ACCELERATION = 0.8f;

@@ -1,5 +1,6 @@
 package com.jflusin.starshipbattle.backend.game.entities.textured.ammo;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.jflusin.starshipbattle.backend.engine.views.AbstractScene;
 import com.jflusin.starshipbattle.backend.game.entities.AbstractEntity;
 import com.jflusin.starshipbattle.backend.game.entities.textured.AbstractTexturedEntity;
+import com.jflusin.starshipbattle.backend.game.enums.Team;
 import com.jflusin.starshipbattle.backend.game.interfaces.Fighter;
 import com.jflusin.starshipbattle.backend.game.interfaces.IsSolid;
 import com.jflusin.starshipbattle.backend.game.utils.AngleUtils;
@@ -29,6 +31,9 @@ public class AmmoEntity extends AbstractTexturedEntity {
 		setX(position.x);
 		setY(position.y);
 		this.shooter = shooter;
+		if (Team.RED.equals(shooter.getTeam())) {
+			getTexturedSprite().getSprite().setColor(Color.RED);
+		}
 	}
 	
 	@Override
